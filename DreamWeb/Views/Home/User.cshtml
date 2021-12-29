@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+    <div class="user-box">
+        <p class="user-name">Test name</p>
+        <p>Followers</p>
+        <p>Following</p>
+        <p>Settings</p>
+    </div>
+
+   <div class="search-box">
+       <div class="order-by">
+           Order by:
+            <select>
+            <option>From old to new</option>
+            <option>From new to old</option>
+            <option>From small to big</option>
+            <option>From big to small</option>    
+        </select>
+       </div>
+       
+        <div class = "find-by-date">
+            Find by date:
+                    <input type = "date">
+        </div>
+
+        <div><input type = "text" placeholder= "Find by key-word"></div>
+        <div><input type="submit" value = "Go!" /></div>
+
+    </div>
+
+
+    
+        <a asp-controller="Home" asp-action="Index"><div class="new-post"> Any new dreams?  </div></a>
+  
+
+    <div class= "old-post">
+        <div class="dream-title">
+            Nice dicka
+            <p class=date-of-topic>29.05.06</p>  
+            <p class="hours-of-sleep">8 hours</p>
+        </div>
+        <div class="topics">
+            Test
+        </div>
+        <div class = "main-plot">
+           test<br></br> test
+        </div>
+        <div class = "mainstory-border"></div>
+                <div class = "main-plot">
+test<br></br>test      </div>
+  <div class = "mainstory-border"></div>
+                <div class = "main-plot">
+tes<br></br> test<br></br>test    </div>
+    </div>
+
+    <div class= "old-post">
+    <p class="ops"> Oooops :(</p>
+    <p class="no-more">You don't have more notes</p>
+    </div>

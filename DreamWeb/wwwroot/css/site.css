@@ -14,5 +14,309 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    background: #FAFAFA;
+}
+
+.log-in-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.log-up-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 70px;
+    padding-bottom: 80px;
+}
+
+input[type = "password"], input[type = "text"] {
+    padding: 10px;
+    margin: 5px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background: none;
+    outline: none;
+}
+
+
+
+.log-in-up input:hover ~ label,
+.log-in-up input:valid ~ label {
+    color: dimgrey;
+    top: -55px;
+
+}
+
+    input[type= "submit"] {
+        background-color: lightgrey;
+        border: 1px solid grey;
+        text-align: center;
+        padding: 5px;
+        margin-bottom: 20px;
+        margin-top: 5px;
+        margin-left: 0px;
+        font-size: 17px;
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        outline: none;
+    }
+
+input[type= "submit"]:hover {
+    background-color: slategrey;
+    transition: 0.5s;
+}
+
+.log-in-form form, .log-up-form form {
+    padding: 0 40px;
+    box-sizing: border-box;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+.log-in-form label, .log-in-form label,
+.log-up-form label, .log-up-form label {
+    position: relative;
+    top: -20px;
+    transform: translateY(-50%);
+    left: 15px;
+    font-size: 16px;
+    transition: .5s;
+    pointer-events: none;
+    color: grey;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.label-for-form{
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-bottom: 2px solid grey;
+}
+
+.sign-in-up-link {
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+    margin-bottom: 10px;
+    position: inherit;
+    border-top: 2px solid grey;
+    text-align: center;
+}
+
+.sign-in-up-link  a {
+    color:darkgray;
+    text-decoration: none;
+}
+
+.sign-in-up-link a:hover{
+    color:darkslategrey;
+    text-decoration: underline;
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    position:relative;
+    text-align: center
+}
+
+
+.header-menu {
+    display: inline-block;
+    font-size: 18px;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+.header-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.header-menu a:hover {
+    color: whitesmoke;
+    transition: 0.5s;
+}
+
+
+.header-menu:hover {
+    background-color: darkslategray;
+    color: white;
+    transition: .5s;
+}
+
+
+.head-menu{
+    border-bottom: 2px solid grey;
+}
+
+
+.user-box {
+    border: 2px solid grey;
+    border-radius: 5px;
+    float: left;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 18px;
+    text-align: Left;
+    background: #E5E5E5;
+}
+
+.search-box {
+    float: left;
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 7px;
+    font-size: 17px;
+    background: #E4F4FA;
+}
+
+.search-box input[type="text"] {
+    background: white;
+}
+
+.search-box div{
+   display:inline-block;
+   padding-left: 5px;
+    padding-right: 8px;
+   font-size: 16px;
+}
+
+.search-box input[type="text"]{
+    width: 450px;
+}
+
+.search-box input[type="submit"]{
+    width: 100px;
+    border-radius: 5px;
+}
+
+.user-box p {
+    border-bottom: 2px solid grey;
+}
+
+.new-post {
+    float: right;
+    min-width: 1100px;
+    margin-top: 10px;
+    height: 50px;
+    margin-bottom: 5px;
+    z-index: 0;
+    border-radius: 5px;
+    border: 2px solid grey;
+    background: #CEE1E9;
+    font-size: 18px;
+    padding-left: 15px;
+    padding-top: 9px;
+}
+
+    .new-post:hover {
+        color: white;
+        background-color: darkcyan;
+    }
+.new-post a:hover .new-post {
+    background-color: teal;
+}
+
+
+.new-post input {
+    background: #CEE1E9;
+}
+
+.new-post:hover input {
+    height: 500px;
+}
+
+
+.old-post {
+    border: 2px solid grey;
+    border-radius: 5px;
+    min-width: 1100px;
+    float: right;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-left: 5px;
+    background: #A7B9C1;
+    z-index: 1;
+}
+
+.ops {
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-right: 5px;
+    background-color: #97A1A5;
+    border-radius: 5px;
+}
+
+.no-more {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.user-name {
+}
+
+
+.dream-title {
+    font-size: 25px;
+    background: #97A1A5;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.topics {
+    font-size: 20px;
+    border-bottom: 2px solid grey;
+    padding-right: 5px;
+}
+
+.main-plot {
+    font-size: 18px;
+
+}
+.mainstory-border {
+    border-bottom: 2px dashed grey;
+}
+
+.date-of-topic{
+    float:right;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.hours-of-sleep{
+    float:right;
+    border-right: 2px solid grey;
+    padding-right: 10px;
 }
