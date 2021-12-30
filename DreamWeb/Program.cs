@@ -1,10 +1,34 @@
 using DreamWeb.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 //services
+//builder.Services.AddAuthentication(sharedOptions =>
+//{
+//    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    // sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+//}).AddCookie(options =>
+//{
+//    options.LoginPath = "/SignIn";
+//}
+
+//    );
+
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        options.LoginPath = "/SignIn";
+//    }
+
+//    );
+
+//builder.Services.AddIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).Add
+
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<DreamsContext>(options =>

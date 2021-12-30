@@ -18,11 +18,34 @@ namespace DreamWeb.Controllers
 
 
         [HttpPost]
-        public string CheckInputData(NewUser newUser)
+        public IActionResult CheckInputData(NewUser newUser)
         {
-            return _signUp.AddNewAccount(newUser) ?? "Everything is ok";
+            string result = _signUp.CreateNewAccount(newUser);
+            if (result == null)
+            {
+                return RedirectToActionPermanent("SignUp", new { resultMessage = "You've created an account", i = true});
+            }
+            else
+            {
+                return RedirectToActionPermanent("SignUp", new { resultMessage = result, i = false }) ;
+            }
 
         }
 
+        public IActionResult SignUp(string resultMessage, bool i)
+        {
+            ViewBag.Error = resultMessage;
+            ViewBag.Success = i;
+            if(_signUp.GetNewUser() != null)
+            {
+                ViewBag.login = _signUp.GetNewUser().Login;
+                ViewBag.password = _signUp.GetNewUser().Password;
+                ViewBag.repassword = _signUp.GetNewUser().Repassword;
+                ViewBag.email = _signUp.GetNewUser().Email;
+                ViewBag.externalId = _signUp.GetNewUser().ExteranlId;
+            }
+
+            return View();
+        }
     }
 }

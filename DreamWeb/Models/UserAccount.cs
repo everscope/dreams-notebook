@@ -12,8 +12,11 @@ namespace DreamWeb.Models
         [Column("external_id")]
         public string? ExternalId { get; set; }
 
-        [Column("nickname")]
-        public string Nickname { get; set; }
+        [Column("login")]
+        public string Login { get; set; }
+
+        [Column("password")]
+        public string Password { get; set; }
 
         [Column("email")]
         public string Email { get; set; }

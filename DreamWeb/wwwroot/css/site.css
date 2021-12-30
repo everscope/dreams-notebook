@@ -320,3 +320,48 @@ header {
     border-right: 2px solid grey;
     padding-right: 10px;
 }
+
+.sign-up-error-message-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid grey;
+    border-radius: 5px;
+    width: 500px;
+    text-align: center;
+    height: 250px;
+    padding: 15px;
+    marg
+}
+
+.sign-up-error-message-text {
+    font-size: 22px;
+
+}
+
+.sign-up-error-message-box input[type="submit"] {
+    background-color: lightgrey;
+    border: 1px solid grey;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 0px;
+    font-size: 20px;
+    width: 40%;
+    height: 40px;
+    cursor: pointer;
+    outline: none;
+}
+
+.sign-up-error-message-box input[type= "submit"]:hover {
+    background-color: slategrey;
+    transition: 0.5s;
+}
+
+.auth-error{
+    text-align: center;
+    font-size: 30px;
+    margin:5px;
+}

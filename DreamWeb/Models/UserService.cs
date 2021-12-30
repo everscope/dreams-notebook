@@ -1,16 +1,23 @@
 ﻿using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+
 
 namespace DreamWeb.Models
 {
     public interface IUserService
     {
-        public string AddNewAccount(NewUser newUser);
+        public string CreateNewAccount(NewUser newUser);
+        public NewUser GetNewUser();
+        public ClaimsPrincipal GetSignInClaims(string login, string password);
     }
 
     public class UserService : IUserService
     {
         private DreamsContext _context;
-        public UserAccount _user { get; set; }
+        private UserAccount _user;
+        private static NewUser _userNew;
 
         private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
 
@@ -19,14 +26,27 @@ namespace DreamWeb.Models
             _context = context;
         }
 
-        public string AddNewAccount(NewUser newUser)
+        public NewUser GetNewUser()
         {
+            return _userNew;
+        }
+
+        public string CreateNewAccount(NewUser newUser)
+        {
+            _userNew = newUser;
             if(CheckNewAccount(newUser) == null) {
                 UserAccount userAccount = new UserAccount();
-                userAccount.Nickname = newUser.Login;
+                userAccount.Login = newUser.Login;
                 userAccount.Email = newUser.Email;
                 userAccount.ExternalId = newUser.ExteranlId;
+                userAccount.Password = newUser.Password;
+
                 userAccount.InternalId = CreateInternalId();
+                userAccount.CreationTime = DateTime.Now;
+
+                _context.UserAccounts.Add(userAccount);
+                _context.SaveChanges();
+
                 return null;
             }
             else
@@ -41,12 +61,12 @@ namespace DreamWeb.Models
             {
                 return "Your passwords doesn't match";
             }
-            else if (!(newAccount.Email.Contains("@") && newAccount.Email.Contains(".")))
+            else if ((newAccount.Email == null) || !(newAccount.Email.Contains("@") && newAccount.Email.Contains(".")))
             {
                 return "Something is wrong with your email";
             }
             else if (_context.UserAccounts.
-                    Any(p => p.Nickname == newAccount.Login))
+                    Any(p => p.Login == newAccount.Login))
             {
                 return "Nickname is taken";
             }
@@ -85,6 +105,32 @@ namespace DreamWeb.Models
 
             return id;
         }
+
+        public ClaimsPrincipal GetSignInClaims(string login, string password)
+        {
+            var p = _context.UserAccounts.First(p => p.Login == login);
+            bool b = _context.UserAccounts.Any(p => p.Login == login);
+            bool b1 = _context.UserAccounts.First(p => p.Login == login).Password == password;
+            var bv = _context.UserAccounts.First(p => p.Login == login).Password;
+            if (_context.UserAccounts.Any(p => p.Login == login) && _context.UserAccounts.First(p => p.Login == login).Password == password)
+            {
+                UserAccount currentUser = _context.UserAccounts.First(p => p.Login == login);
+
+                var claims = new List<Claim>();
+                claims.Add(new Claim("nickname", login));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, login));
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                return claimsPrincipal;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 
     public class NewUser

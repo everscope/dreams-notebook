@@ -1,0 +1,31 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@{
+    ViewData["Title"] = "Dreams";
+}
+<header>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</header>
+
+
+    <h1 class="display-4"></h1>
+       <div class ="auth-error">@ViewBag.Error</div>
+
+    <div class = "log-in-form">
+        
+        @using(Html.BeginForm("SignIn", "SignIn", FormMethod.Post)){
+        <div class=label-for-form>Sign in</div>
+        <div class="log-in-up">
+            <input type="text" id="login" name = "login" @*required*@>
+            <label>Your login</label><br>
+        </div>
+        <div class="log-in-up" >
+            <input type="password" id="password" name = "password" @*required*@>
+            <label >Your password</label><br>
+        </div>
+        <input type="submit" value = "Sign in">
+        <div class = "sign-in-up-link">
+        <a asp-controller="SignUp" asp-action="SignUp">Sign Up</a>
+        </div>
+    }   
+
+    </div>
