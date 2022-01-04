@@ -1,5 +1,4 @@
 using DreamWeb.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,13 +27,28 @@ var builder = WebApplication.CreateBuilder(args);
 //    );
 
 //builder.Services.AddIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).Add
-
-builder.Services.AddIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<DreamsContext>();
+builder.Services.AddAuthentication();
+builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("server = SCAT\\SQLEXPRESS; database = dreams_web; Trusted_Connection=True ; MultipleActiveResultSets = true"));
+builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DreamsContext>();
+
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedAccount = false;
+
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 1;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+});
 
 var app = builder.Build();
 

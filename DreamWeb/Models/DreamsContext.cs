@@ -15,7 +15,7 @@ namespace DreamWeb.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserAccount>().ToTable("dreams_user");
+    
             modelBuilder.Entity<DreamPublication>().ToTable("dream_publications");
 
             base.OnModelCreating(modelBuilder);

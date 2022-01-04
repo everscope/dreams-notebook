@@ -10,6 +10,7 @@ namespace DreamWeb.Models
     {
         public Task<string> CreateNewAccount(NewUser newUser);
         public NewUser GetNewUser();
+        public Task<string> SignIn(string login, string password);
     }
 
     public class UserService : IUserService
@@ -18,13 +19,15 @@ namespace DreamWeb.Models
         private UserAccount _user;
         private static NewUser _userNew;
         private UserManager<UserAccount> _userManager;
+        private SignInManager<UserAccount> _signInManager;
 
         private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
 
-        public UserService(DreamsContext context, UserManager<UserAccount> userManager)
+        public UserService(DreamsContext context, UserManager<UserAccount> userManager, SignInManager<UserAccount> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public NewUser GetNewUser()
@@ -35,19 +38,22 @@ namespace DreamWeb.Models
         public async Task<string> CreateNewAccount(NewUser newUser)
         {
             _userNew = newUser;
-            if(CheckNewAccount(newUser) == null) {
-                UserAccount userAccount = new UserAccount();
-                userAccount.Login = newUser.Login;
-                userAccount.Email = newUser.Email;
-                userAccount.ExternalId = newUser.ExteranlId;
-                userAccount.Password = newUser.Password;
+            if(CheckNewAccount(newUser) == null)
+            {
+                var user = new UserAccount { Email = newUser.Email,
+                                            UserName = newUser.Login,
+                                            ExternalId = newUser.ExteranlId,
+                                            Id = CreateInternalId(),
+                                            CreationTime = DateTime.Now
+                                            };
+                var result = await _userManager.CreateAsync(user, newUser.Password);
 
-                userAccount.InternalId = CreateInternalId();
-                userAccount.CreationTime = DateTime.Now;
-
-                await _userManager.CreateAsync(userAccount);
-
-                return null;
+                var error = result.Errors.FirstOrDefault();
+                if (result.Succeeded)
+                {
+                    return null;
+                }
+                return "Something went wrong";
             }
             else
             {
@@ -66,7 +72,7 @@ namespace DreamWeb.Models
                 return "Something is wrong with your email";
             }
             else if (_context.UserAccounts.
-                    Any(p => p.Login == newAccount.Login))
+                    Any(p => p.UserName == newAccount.Login))
             {
                 return "Nickname is taken";
             }
@@ -98,12 +104,27 @@ namespace DreamWeb.Models
             }
 
             if(_context.UserAccounts.
-               Any(p => p.InternalId == id))
+               Any(p => p.Id == id))
             {
                 id = CreateInternalId();
             }
 
             return id;
+        }
+
+        public async Task<string> SignIn(string login, string password)
+        {
+
+
+            var result = await _signInManager.PasswordSignInAsync(login, password, true, true);
+            if (result.Succeeded)
+            {
+                return "Success";
+            }
+            else
+            {
+                return "Fail";
+            }
         }
 
     }

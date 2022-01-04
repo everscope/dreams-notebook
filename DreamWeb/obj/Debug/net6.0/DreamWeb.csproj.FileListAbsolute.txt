@@ -270,3 +270,6 @@ F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Ident
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\libman.json
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\obj\Debug\net6.0\DreamWeb.MvcApplicationPartsAssemblyInfo.cs
