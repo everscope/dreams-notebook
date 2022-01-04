@@ -18,9 +18,9 @@ namespace DreamWeb.Controllers
 
 
         [HttpPost]
-        public IActionResult CheckInputData(NewUser newUser)
+        public async Task<IActionResult> CheckInputData(NewUser newUser)
         {
-            string result = _signUp.CreateNewAccount(newUser);
+            string result = await _signUp.CreateNewAccount(newUser);
             if (result == null)
             {
                 return RedirectToActionPermanent("SignUp", new { resultMessage = "You've created an account", i = true});

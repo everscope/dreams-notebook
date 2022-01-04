@@ -2,15 +2,14 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace DreamWeb.Models
 {
     public interface IUserService
     {
-        public string CreateNewAccount(NewUser newUser);
+        public Task<string> CreateNewAccount(NewUser newUser);
         public NewUser GetNewUser();
-        public ClaimsPrincipal GetSignInClaims(string login, string password);
     }
 
     public class UserService : IUserService
@@ -18,12 +17,14 @@ namespace DreamWeb.Models
         private DreamsContext _context;
         private UserAccount _user;
         private static NewUser _userNew;
+        private UserManager<UserAccount> _userManager;
 
         private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
 
-        public UserService(DreamsContext context)
+        public UserService(DreamsContext context, UserManager<UserAccount> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public NewUser GetNewUser()
@@ -31,7 +32,7 @@ namespace DreamWeb.Models
             return _userNew;
         }
 
-        public string CreateNewAccount(NewUser newUser)
+        public async Task<string> CreateNewAccount(NewUser newUser)
         {
             _userNew = newUser;
             if(CheckNewAccount(newUser) == null) {
@@ -44,8 +45,7 @@ namespace DreamWeb.Models
                 userAccount.InternalId = CreateInternalId();
                 userAccount.CreationTime = DateTime.Now;
 
-                _context.UserAccounts.Add(userAccount);
-                _context.SaveChanges();
+                await _userManager.CreateAsync(userAccount);
 
                 return null;
             }
@@ -104,31 +104,6 @@ namespace DreamWeb.Models
             }
 
             return id;
-        }
-
-        public ClaimsPrincipal GetSignInClaims(string login, string password)
-        {
-            var p = _context.UserAccounts.First(p => p.Login == login);
-            bool b = _context.UserAccounts.Any(p => p.Login == login);
-            bool b1 = _context.UserAccounts.First(p => p.Login == login).Password == password;
-            var bv = _context.UserAccounts.First(p => p.Login == login).Password;
-            if (_context.UserAccounts.Any(p => p.Login == login) && _context.UserAccounts.First(p => p.Login == login).Password == password)
-            {
-                UserAccount currentUser = _context.UserAccounts.First(p => p.Login == login);
-
-                var claims = new List<Claim>();
-                claims.Add(new Claim("nickname", login));
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, login));
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                return claimsPrincipal;
-            }
-            else
-            {
-                return null;
-            }
         }
 
     }

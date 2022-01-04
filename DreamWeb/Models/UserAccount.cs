@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DreamWeb.Models
 {
-    public class UserAccount
+    public class UserAccount : IdentityUser
     { 
         [Key]
         [Column("internal_id")]

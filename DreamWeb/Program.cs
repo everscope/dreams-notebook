@@ -29,6 +29,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).Add
 
+builder.Services.AddIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DreamsContext>();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<DreamsContext>(options =>

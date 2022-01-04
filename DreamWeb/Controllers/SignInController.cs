@@ -2,18 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Authentication;
-
+using Microsoft.AspNetCore.Identity;
 
 namespace DreamWeb.Controllers
 {
     public class SignInController : Controller
     {
-
+        private readonly UserManager<UserAccount> _userManager;
         private IUserService _signIn;
 
-        public SignInController (IUserService SignIn)
+        public SignInController (IUserService SignIn, UserManager<UserAccount> UserManager)
         {
             _signIn = SignIn;
+            _userManager = UserManager;
         }
 
         [HttpGet("SignIn")]
@@ -35,7 +36,7 @@ namespace DreamWeb.Controllers
         //    return "fail";
         //    //return RedirectToAction("Index", "Home");
         //}
-        public IActionResult SignIn(string login, string password)
+        public async Task<IActionResult> SignIn(string login, string password)
         {
             return RedirectToAction("SignIn");
         }

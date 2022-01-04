@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DreamWeb.Models
 {
-    public class DreamsContext : DbContext
+    public class DreamsContext : IdentityDbContext<UserAccount>
     {
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<DreamPublication> DreamPublications { get; set; }
