@@ -27,7 +27,6 @@ var builder = WebApplication.CreateBuilder(args);
 //    );
 
 //builder.Services.AddIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).Add
-builder.Services.AddAuthentication();
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
@@ -35,6 +34,7 @@ builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("server = SCAT\\SQLEXPRESS; database = dreams_web; Trusted_Connection=True ; MultipleActiveResultSets = true"));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
+builder.Services.AddAuthentication().AddCookie();
 
 
 builder.Services.Configure<IdentityOptions>(options =>

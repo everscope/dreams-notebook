@@ -36,9 +36,9 @@ namespace DreamWeb.Controllers
         //    return "fail";
         //    //return RedirectToAction("Index", "Home");
         //}
-        public async Task<string> SignIn(string login, string password)
+        public async Task<IActionResult> SignIn(string login, string password)
         {
-            return await _signIn.SignIn(login, password) + User.Claims.ToString();
+            return RedirectToAction("Index", "Home");
             //return RedirectToAction("SignIn");
         }
 

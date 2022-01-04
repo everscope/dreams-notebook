@@ -18,7 +18,19 @@
         </div>
 
         <div class="header-menu">
-                <a  asp-controller="Home" asp-action= "Index">My account</a>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a  asp-controller="Home" asp-action= "Index">My account</a>
+                    }
+                    else
+                    {
+                        <a  asp-controller="Home" asp-action= "Index">not account</a>
+                    }
+
+                
+            
+                 }
         </div>
 
         <div class="header-menu">
