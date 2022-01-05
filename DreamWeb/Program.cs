@@ -1,32 +1,11 @@
 using DreamWeb.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-//services
-//builder.Services.AddAuthentication(sharedOptions =>
-//{
-//    sharedOptions.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-//    // sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-//}).AddCookie(options =>
-//{
-//    options.LoginPath = "/SignIn";
-//}
-
-//    );
-
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(options =>
-//    {
-//        options.LoginPath = "/SignIn";
-//    }
-
-//    );
-
-//builder.Services.AddIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false).Add
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
@@ -48,6 +27,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 1;
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
+});
+
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
+{
+    options.LoginPath = "/SignIn";
 });
 
 var app = builder.Build();
