@@ -14,7 +14,9 @@
 
 
 
-
+.danger-register-span{
+    padding-bottom: 100px;
+}
 
 
 
@@ -63,21 +65,7 @@ html {
 /*    background: #FAFAFA;*/
 /*}*/
 
-.log-in-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
-.log-up-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin-top: 70px;
-    padding-bottom: 80px;
-}
 
 input[type = "password"], input[type = "text"] {
     padding: 10px;
@@ -86,7 +74,7 @@ input[type = "password"], input[type = "text"] {
     margin-bottom: 0px;
     margin-left: 0px;
     width: 100%;
-    height: 40px;
+    height: 50px;
     font-size: 16px;
     border: 2px solid grey;
     border-radius: 5px;
@@ -95,45 +83,41 @@ input[type = "password"], input[type = "text"] {
 }
 
 
-
-.log-in-up input:hover ~ label,
-.log-in-up input:valid ~ label {
+.log-in-up input[type = "password"]:hover ~ label,
+.log-in-up input[type = "password"]:focus ~ label,
+.log-in-up input[type = "password"]:valid ~ label,
+.log-in-up input[type = "text"]:hover ~ label,
+.log-in-up input[type = "text"]:focus ~ label,
+.log-in-up input[type = "text"]:valid ~ label {
     color: dimgrey;
-    top: -55px;
-
+    top: -67px;
 }
 
-    input[type= "submit"] {
-        background-color: lightgrey;
-        border: 1px solid grey;
-        text-align: center;
-        padding: 5px;
-        margin-bottom: 20px;
-        margin-top: 5px;
-        margin-left: 0px;
-        font-size: 17px;
-        width: 100%;
-        height: 40px;
-        cursor: pointer;
-        outline: none;
+input[type= "submit"] {
+    background-color: #6c757d;
+    border: 1px solid grey;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-left: 0px;
+    font-size: 17px;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    outline: none;
+    color: white;
+}
+
+    input[type= "submit"]:hover {
+        background-color: #5c636a;
+        transition: 0.5s;
     }
 
-input[type= "submit"]:hover {
-    background-color: slategrey;
-    transition: 0.5s;
-}
-
-.log-in-form form, .log-up-form form {
-    padding: 0 40px;
-    box-sizing: border-box;
-    border: 2px solid grey;
-    border-radius: 5px;
-}
-
-.log-in-form label, .log-in-form label,
-.log-up-form label, .log-up-form label {
+.log-in-form input[type = "password"] ~ label, .log-in-form input[type = "text"] ~ label,
+.log-up-form input[type = "text"] ~ label, .log-up-form input[type = "password"] ~ label {
     position: relative;
-    top: -20px;
+    top: -25px;
     transform: translateY(-50%);
     left: 15px;
     font-size: 16px;
@@ -143,7 +127,6 @@ input[type= "submit"]:hover {
     margin: 0px;
     padding: 0px;
 }
-
 
 .label-for-form{
     font-size: 30px;

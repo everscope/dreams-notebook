@@ -33,9 +33,9 @@
 
             <div class ="col-4">
                <div class="d-grid gap-2">
-            <button type="button" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + @Url.Action("SignUp", "SignUp") + "'")">Sign Up</button> 
+            <button type="button" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + "Identity/Account/Register" + "'")">Sign Up</button> 
 
-            <button type="button" class="btn btn-secondary btn-lg"  onclick="@("window.location.href='" + @Url.Action("SignIn", "SignIn") + "'")">Sign In</button>
+            <button type="button" class="btn btn-secondary btn-lg"  onclick="@("window.location.href='" +"Identity/Account/Login" + "'")">Sign In</button>
             <p class = "fs-5 text text-center" >If you don't have account, you can create it</p>
             <p class = "fs-5 text text-center">If you have account, you can sign in</p>
         </div></div>            </div>  
@@ -43,10 +43,10 @@
 
             
 
-@*        <a class="nav-link text-dark" asp-area="" asp-controller="SignIn" asp-action="SignIn">Sign In</a> 
+        <a class="nav-link text-dark" asp-area="" asp-controller="SignIn" asp-action="SignIn">Sign In</a> 
         <a class="nav-link text-dark" asp-area="" asp-controller="SignUp" asp-action="SignUp">Sign Up</a>
-        <a class="nav-link text-dark" asp-controller="User" asp-action="User">User</a>*@
-           
+        <a class="nav-link text-dark" asp-controller="User" asp-action="User">User</a>
+                   <a class="nav-link text-dark" href ="Identity/Account/Logout">LogOut</a>
 
 
   </body>

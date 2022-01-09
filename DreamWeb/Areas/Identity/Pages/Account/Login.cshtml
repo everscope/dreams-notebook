@@ -2,15 +2,15 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Sign in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
+@*<h1>@ViewData["Title"]</h1>*@
+@*<div class="row">
+    <div class="col">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
@@ -48,37 +48,44 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 col-md-offset-2">
+    
+</div>*@
+
+        <div class ="auth-error">@ViewBag.Error</div>
         <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
+        <form id="account" method="post">
+       <div class = "container log-in-form" style="margin-top: 10%;">
+            <div class = "row justify-content-center align-items-center">
+            <div class = "col-4 " style = "border: 2px solid grey; border-radius: 5px; padding: 20px;">
+            
+            <div class="label-for-form" >Sign in</div>
+            <div class="log-in-up">
+                <input asp-for="Input.Login" autocomplete="username" aria-required="true" type="text" id="loginLabel" name = "login" required>
+                <label asp-for="Input.Login">Your login</label><br>
+                <span asp-validation-for="Input.Login" class="text-danger"></span>
+            </div>
+            <div class="log-in-up"  >
+                <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" type="password" id="password" name = "password" required>
+                <label asp-for="Input.Password">Your password</label><br>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+              <input  asp-for="Input.RememberMe" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label label asp-for="Input.RememberMe" class="form-check-label" for="flexCheckDefault">
+                  <p class ="text @*text-muted*@ fs-6 ">Remember me</p>
+              </label>
+            </div>
+            <input  type="submit" value = "Sign in">
+            <div class = "sign-in-up-link">
+            <a asp-controller="SignUp" asp-action="SignUp"><p>Sign Up</a>
+                <a asp-controller="SignUp" asp-action="SignUp"><p>Forgot you password? :(</a>
+            </div>
+             
+             </div>
+             </div>
+        </div>
+         </form> 
+         </section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
