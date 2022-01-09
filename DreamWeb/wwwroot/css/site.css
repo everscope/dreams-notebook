@@ -1,5 +1,49 @@
+.site-name-main {
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+
+.about-main-page {
+    padding-top: 10px;
+}
+
+.login-main-page{
+    padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -13,11 +57,11 @@ html {
   min-height: 100%;
 }
 
-body {
+/*body {
     margin-bottom: 60px;
-    padding-bottom: 60px;
-    background: #FAFAFA;
-}
+    padding-bottom: 60px;*/
+/*    background: #FAFAFA;*/
+/*}*/
 
 .log-in-form {
     position: absolute;
@@ -365,3 +409,4 @@ header {
     font-size: 30px;
     margin:5px;
 }
+
