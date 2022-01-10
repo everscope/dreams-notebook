@@ -3,10 +3,116 @@
 *@
 @{
 }
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
+    <head>
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    </head>
+    <body>
 
-    <div class="user-box">
+        <div class = "container">
+            <div class= "row">
+                <div class = "col-2 text fs-4 " style = "margin-top:20px; "> 
+                    <div style="border: 2px solid grey; border-radius: 5px; padding:10px;" >
+                    <div class = "border-bottom border-2 ">
+                        User name
+                    </div>
+                    <div>
+                        Followers
+                    </div>
+                    <div>
+                        Following
+                    </div>
+                    <div>
+                        Settings
+                    </div>
+                    <div>
+                        Sign out
+                    </div>
+                    </div>
+                </div>
+                <div class = "col-9">
+                    <div class = "row" style = "border: 2px solid grey; border-radius: 5px; margin-top: 20px; margin-left: 10px;">
+                        <div class = "col-3" style="padding-top: 5px; padding-bottom: 5px;">
+                            Order by:
+                            <select class="" aria-label="">
+                              <option value="1">From old to new</option>
+                              <option value="2">From new to old</option>
+                              <option value="3">From short to long</option>
+                              <option value="4">From long to short</option>    
+                            </select>
+                        </div>
+                        <div class = "col-3" style =" padding-top: 5px; padding-bottom: 5px;">
+                            <div class="">
+                                <label for="inputDate">Select date:</label>
+                                <input type="date" class="">
+                            </div>
+                        </div>
+                        <div class = "col-4" style = "padding-top: 5px; padding-bottom: 10px;">
+                            <div>
+                                 <input type="text" class="" placeholder= "Find key words" style="height: 40px; padding-top: 5px; padding-bottom: 5px;">   
+                            </div>
+                        </div>
+                        <div class = "col-2" style ="padding-top: 10px; padding-bottom: 5px;">
+                             <button id="searchSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Go!</button>
+                        </div>
+                    </div>
+                    <div class = "row">
+                        <div class ="col-12" style="margin-left:10px;">
+                           <input type="text" placeholder ="Any new dreams?"/>
+                        </div>
+                    </div>
+                    <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
+                        <div class = "row ">
+                            <div class = "col-4" style = "padding:10px;">                      
+                                <p class ="badge bg-secondary fs-5">Publication name</p>
+                             </div>
+                            <div class = "col-4" style = "padding:10px;">
+                                <p class =" fs-5">publication date: 29.01.2222</p>
+                            </div>
+                            <div class = "col-3" style = "padding:10px; ">
+                                <p class =" fs-5">sleep duration: 7h</p>
+
+                            </div>
+
+                        </div>
+                      
+                        <div class = "row">
+                            <div class = "col">  
+                                <p class = "fs-5 text-muted border border-2 rounded-3">topics</p>
+                            </div>
+                        </div>
+                        <div class = "row">
+                            <div class = "col fs-6" style="margin: 10px;">
+                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
+                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
+                            </div>
+                        </div>
+
+                        <span class = "border-bottom border-3"></span>
+
+                        <div class = "row">
+                            <div class = "col fs-6" style="margin: 10px;">
+                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
+                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
+                            </div>
+                        </div>
+                        <span class = "border-bottom border-3"></span>
+
+                        <div class = "row">
+                            <div class = "col fs-6" style="margin: 10px;">
+                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
+                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+   @* <div class="user-box">
         <p class="user-name">Test name</p>
         <p>Followers</p>
         <p>Following</p>
@@ -62,4 +168,4 @@ tes<br></br> test<br></br>test    </div>
     <div class= "old-post">
     <p class="ops"> Oooops :(</p>
     <p class="no-more">You don't have more notes</p>
-    </div>
+    </div>*@
