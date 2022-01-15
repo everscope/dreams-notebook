@@ -273,3 +273,6 @@ F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\libman.json
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\obj\Debug\net6.0\DreamWeb.MvcApplicationPartsAssemblyInfo.cs
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\MailKit.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\MimeKit.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\BouncyCastle.Crypto.dll

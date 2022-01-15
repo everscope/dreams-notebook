@@ -9,10 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<DreamInput, DreamInput>();
 builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("server = SCAT\\SQLEXPRESS; database = dreams_web; Trusted_Connection=True ; MultipleActiveResultSets = true"));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddAuthentication().AddCookie();
 
 

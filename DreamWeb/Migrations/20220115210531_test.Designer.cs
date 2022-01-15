@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreamWeb.Migrations
 {
     [DbContext(typeof(DreamsContext))]
-    [Migration("20220104161411_update3")]
-    partial class update3
+    [Migration("20220115210531_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,7 @@ namespace DreamWeb.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("published_content");
+                        .HasColumnName("content");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2")
@@ -48,9 +48,24 @@ namespace DreamWeb.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("external_id");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int")
+                    b.Property<string>("Hours")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("hours");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
                         .HasColumnName("status");
+
+                    b.Property<string>("Topics")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("topics");
 
                     b.HasKey("InternalID");
 

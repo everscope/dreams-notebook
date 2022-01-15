@@ -1,12 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-    <head>
+﻿
+<head>
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
             <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <script scr="~/lib/jquerry/dist/jquerry.js"></script>
+             <script scr="~/js/site.js"></script>
     </head>
     <body>
 
@@ -15,19 +12,23 @@
                 <div class = "col-2 text fs-4 " style = "margin-top:20px; "> 
                     <div style="border: 2px solid grey; border-radius: 5px; padding:10px;" >
                     <div class = "border-bottom border-2 ">
-                        User name
+                        @ViewBag.Context.UserName
+                    </div>
+                  @*  <div>
+                         <button type="submit" style ="padding-left: 0px; padding-top:0px;"class=" text fs-4 nav-link btn btn-link text-dark">Followers</button>
                     </div>
                     <div>
-                        Followers
+                        <button type="submit" style ="padding-left: 0px; padding-top:0px;"class=" text fs-4 nav-link btn btn-link text-dark">Following</button>
+                    </div>*@
+                    <div>
+                        <button type="submit" style ="padding-left: 0px; padding-top:0px;"class=" text fs-4 nav-link btn btn-link text-dark">Settings</button>
                     </div>
                     <div>
-                        Following
-                    </div>
-                    <div>
-                        Settings
-                    </div>
-                    <div>
-                        Sign out
+                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                         <button type="submit" style ="padding-left: 0px; padding-top:0px;"class=" text fs-4 nav-link btn btn-link text-dark">Sign out</button>
+                         </form>
+               
+
                     </div>
                     </div>
                 </div>
@@ -57,11 +58,73 @@
                              <button id="searchSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Go!</button>
                         </div>
                     </div>
-                    <div class = "row">
+
+                    <div class = "row input-dreams-trigger-div">
                         <div class ="col-12" style="margin-left:10px;">
-                           <input type="text" placeholder ="Any new dreams?"/>
+                           <input class = "input-dreams-trigger" type="text" placeholder ="Any new dreams?"/>
                         </div>
                     </div>
+
+                    <form asp-controller="User" asp-action="AddDream" method = "post">
+                            <div  class = "dreamstory-input" style = "border-radius: 5px; border: 2px solid grey; margin-left: 10px; margin-top: 10px;padding:10px;">
+                             <div class = "row">
+                                <div class ="col-12" style="">
+                                    <label class = "fs-5">Dream's name</label>
+                                   <input class = "dreams-input-trigger-main" name="dreamName" type="text" placeholder ="My dream will be named..."/>
+
+                                </div>
+                            </div>
+                            <div class = "row" style = "padding-bottom: 20px;">
+                                <div class ="col-12" style="">
+                                    <label class = "fs-5">Dream's topics</label>
+                                   <input name = "topics" type="text" placeholder ="Topics: Cats, dogs, a lot of cheese"/>
+
+                                </div>
+                                    <div class ="col-12" style="">
+                                     <label class = "fs-5">Hours spent asleep:</label>
+                                   <input name="hours" class = "dreams-input-trigger-main" type="text" placeholder ="8,5"/>
+
+                                </div>
+                            </div>
+                            <div style = "margin-top:5px; margin-bottom:5px" class = "border-bottom border-3"></div>
+
+
+                            <div class = "dreamstory-input-part">
+                                <div class = "input-block">
+                                    <div class = "row">
+                                        <div class ="col-12" >
+                                            <label class = "fs-5">Dream's text</label>
+                                            <button type="button" class = "dreaminput-delete-btn btn btn-dark" style="float: right; margin-top: 10px;" >Delete section</button>
+                                            <textarea name = "content" style = "min-height: 450px;" type="text" placeholder ="Well, there was a big cat and there was a big bike..."></textarea>
+                                            <button type="button" class = "dreaminput-new-section-btn btn btn-secondary" style="margin-top: 10px; margin-bottom: 10px;" >Add new section</button>
+                                            <div style = "margin-top:5px; margin-bottom:5px" class = "border-bottom border-3"></div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class = "row">
+                                <div class = "col-12">
+                                    <input name = "externalId" style = "height: 40px" type = "text" placeholder = "Here you can create External ID, if you want"></inputane>
+                                        <div class="form-check" style = "margin: 10px">
+                              <input value="true" name = "isPublic" class="form-check-input" type="checkbox" id="flexCheckDefault"/>
+                              <label style = "margin-top:0px"; class="form-check-label" for="flexCheckDefault">
+                                Make this publication public
+                              </label>
+                                </div>
+                                 <div style = "margin-top:5px; margin-bottom:5px" class = "border-bottom border-3"></div>
+                                </div>
+                            <div class = "row">
+                                <div class ="col-12" style="margin-top: 10px;">
+                                    <button type="submit" class = "btn btn-secondary">Add note</button>
+                                    <button style = "float:right;" type="button" class = "btn btn-dark dream-input-cancel">Cancel</button>
+                                </div>
+                            </div>  
+                            </div>
+                            </div>
+                            <input name="authorId" hidden value = @ViewBag.Context.Id ></input>
+                        </form>
+                        
                     <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                         <div class = "row ">
                             <div class = "col-4" style = "padding:10px;">                      
@@ -110,62 +173,4 @@
             </div>
         </div>
 
-    </body>
-
-   @* <div class="user-box">
-        <p class="user-name">Test name</p>
-        <p>Followers</p>
-        <p>Following</p>
-        <p>Settings</p>
-    </div>
-
-   <div class="search-box">
-       <div class="order-by">
-           Order by:
-            <select>
-            <option>From old to new</option>
-            <option>From new to old</option>
-            <option>From small to big</option>
-            <option>From big to small</option>    
-        </select>
-       </div>
-       
-        <div class = "find-by-date">
-            Find by date:
-                    <input type = "date">
-        </div>
-
-        <div><input type = "text" placeholder= "Find by key-word"></div>
-        <div><input type="submit" value = "Go!" /></div>
-
-    </div>
-
-
-    
-        <a asp-controller="Home" asp-action="Index"><div class="new-post"> Any new dreams?  </div></a>
-  
-
-    <div class= "old-post">
-        <div class="dream-title">
-            test
-            <p class=date-of-topic>29.05.06</p>  
-            <p class="hours-of-sleep">8 hours</p>
-        </div>
-        <div class="topics">
-            Test
-        </div>
-        <div class = "main-plot">
-           test<br></br> test
-        </div>
-        <div class = "mainstory-border"></div>
-                <div class = "main-plot">
-test<br></br>test      </div>
-  <div class = "mainstory-border"></div>
-                <div class = "main-plot">
-tes<br></br> test<br></br>test    </div>
-    </div>
-
-    <div class= "old-post">
-    <p class="ops"> Oooops :(</p>
-    <p class="no-more">You don't have more notes</p>
-    </div>*@
+   </body>
