@@ -2,20 +2,19 @@
 {
     public class DreamInput
     {
-        public string Name { get;  set; }
-        public string Topics { get;  set; }
-        public string Hours { get;  set; }
-        public string[] Content { get;  set; }
-        public string ExternalId { get;  set; }
-        public bool IsPublic { get;  set; }
-        public string AuthorId { get;  set; }
-        public DateTime CreationDate { get;  set; }
-        public string Id { get;  set; }
+        public string Name { get; set; }
+        public string Topics { get; set; }
+        public string Hours { get; set; }
+        public string[] Content { get; set; }
+        public bool IsPublic { get; set; }
+        public string AuthorId { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string Id { get; set; }
 
         private DreamsContext _dbContext;
 
         private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
-        private string splitContentMarker = "(%%#newpart#%%)";
+        public static string splitContentMarker { get; private set; } = "(%%#newpart#%%)";
 
         //Status = input.IsPublic;
         //    AuthorID = input.AuthorID;
@@ -57,9 +56,10 @@
 
         }
 
-        public void RemoveDream()
+        public async Task RemoveDreamAsync(string id)
         {
-
+            _dbContext.DreamPublications.Remove(_dbContext.DreamPublications.First(p => p.Id == id));
+            _dbContext.SaveChanges();
         }
 
         private string CreateInternalId()
@@ -72,7 +72,7 @@
             }
 
             if (_dbContext.DreamPublications.
-               Any(p => p.InternalID == id))
+               Any(p => p.Id == id))
             {
                 id = CreateInternalId();
             }
@@ -83,19 +83,19 @@
         private DreamPublication ToDreamPublication(DreamInput input)
         {
             DreamPublication publication = new DreamPublication();
-            publication.InternalID = CreateInternalId();
+            publication.Id = CreateInternalId();
             publication.Name = input.Name;
             publication.Topics = input.Topics;
             publication.Hours = input.Hours;
-            publication.ExternalID = input.ExternalId;
             publication.AuthorID = input.AuthorId;
+            publication.Status = input.IsPublic;
 
             publication.CreationDate = DateTime.Now;
 
-            string content = "";
-            for (int i = 0; i < input.Content.Length-1; i++ )
+            string content = input.Content[0];
+            for (int i = 1; i < input.Content.Length; i++ )
             {
-                content += input.Content[i] + splitContentMarker;
+                content += splitContentMarker + input.Content[i];
             }
             publication.Content = content;
             return publication;

@@ -95,7 +95,7 @@ input[type = "password"], input[type = "text"], textarea {
     top: -67px;
 }
 
-input[type= "submit"] {
+.greyInput input[type= "submit"] {
     background-color: #6c757d;
     border: 1px solid grey;
     text-align: center;

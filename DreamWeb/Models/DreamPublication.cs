@@ -18,12 +18,9 @@ namespace DreamWeb.Models
         [Column("creation_date")]
         public DateTime CreationDate { get; set; }
 
-        [Column("external_id")]
-        public string? ExternalID { get; set; }
-
         [Column("internal_id")]
         [Key]
-        public string InternalID { get; set; }
+        public string Id { get; set; }
 
         [Column("topics")]
         public string Topics { get; set; }

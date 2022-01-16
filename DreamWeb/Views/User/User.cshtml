@@ -1,7 +1,12 @@
-﻿
+﻿@{
+    //List<DreamPublication> noteContent = ViewBag.Content;
+}
+
+
 <head>
+                <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
             <script scr="~/lib/jquerry/dist/jquerry.js"></script>
              <script scr="~/js/site.js"></script>
     </head>
@@ -12,7 +17,7 @@
                 <div class = "col-2 text fs-4 " style = "margin-top:20px; "> 
                     <div style="border: 2px solid grey; border-radius: 5px; padding:10px;" >
                     <div class = "border-bottom border-2 ">
-                        @ViewBag.Context.UserName
+                        @ViewBag.UserContext.UserName
                     </div>
                   @*  <div>
                          <button type="submit" style ="padding-left: 0px; padding-top:0px;"class=" text fs-4 nav-link btn btn-link text-dark">Followers</button>
@@ -33,12 +38,13 @@
                     </div>
                 </div>
                 <div class = "col-9">
+                    <form asp-controller="User" asp-action="DreamsSort" method="get">
                     <div class = "row" style = "border: 2px solid grey; border-radius: 5px; margin-top: 20px; margin-left: 10px;">
                         <div class = "col-3" style="padding-top: 5px; padding-bottom: 5px;">
                             Order by:
-                            <select class="" aria-label="">
-                              <option value="1">From old to new</option>
-                              <option value="2">From new to old</option>
+                            <select name="orderBy">
+                              <option value="1">From new to old</option>
+                              <option value="2">From old to new</option>
                               <option value="3">From short to long</option>
                               <option value="4">From long to short</option>    
                             </select>
@@ -46,18 +52,19 @@
                         <div class = "col-3" style =" padding-top: 5px; padding-bottom: 5px;">
                             <div class="">
                                 <label for="inputDate">Select date:</label>
-                                <input type="date" class="">
+                                <input name ="date" type="date" class="">
                             </div>
                         </div>
                         <div class = "col-4" style = "padding-top: 5px; padding-bottom: 10px;">
                             <div>
-                                 <input type="text" class="" placeholder= "Find key words" style="height: 40px; padding-top: 5px; padding-bottom: 5px;">   
+                                 <input name ="keyWords" type="text" class="" placeholder= "Find key words" style="height: 40px; padding-top: 5px; padding-bottom: 5px;">   
                             </div>
                         </div>
                         <div class = "col-2" style ="padding-top: 10px; padding-bottom: 5px;">
                              <button id="searchSubmit" type="submit" class="w-100 btn btn-lg btn-secondary">Go!</button>
                         </div>
                     </div>
+                    </form>
 
                     <div class = "row input-dreams-trigger-div">
                         <div class ="col-12" style="margin-left:10px;">
@@ -69,20 +76,20 @@
                             <div  class = "dreamstory-input" style = "border-radius: 5px; border: 2px solid grey; margin-left: 10px; margin-top: 10px;padding:10px;">
                              <div class = "row">
                                 <div class ="col-12" style="">
-                                    <label class = "fs-5">Dream's name</label>
-                                   <input class = "dreams-input-trigger-main" name="dreamName" type="text" placeholder ="My dream will be named..."/>
+                                    <label class = "fs-5">Dream's name</a></label>
+                                   <input required class = "dreams-input-trigger-main" name="dreamName" type="text" placeholder ="My dream will be named..."/>
 
                                 </div>
                             </div>
                             <div class = "row" style = "padding-bottom: 20px;">
                                 <div class ="col-12" style="">
                                     <label class = "fs-5">Dream's topics</label>
-                                   <input name = "topics" type="text" placeholder ="Topics: Cats, dogs, a lot of cheese"/>
+                                   <input name = "topics" type="text" placeholder ="Topics: Cats, dogs, a lot of cheese" required/>
 
                                 </div>
                                     <div class ="col-12" style="">
                                      <label class = "fs-5">Hours spent asleep:</label>
-                                   <input name="hours" class = "dreams-input-trigger-main" type="text" placeholder ="8,5"/>
+                                   <input name="hours" class = "dreams-input-trigger-main" type="text" placeholder ="8,5" required/>
 
                                 </div>
                             </div>
@@ -94,7 +101,8 @@
                                     <div class = "row">
                                         <div class ="col-12" >
                                             <label class = "fs-5">Dream's text</label>
-                                            <button type="button" class = "dreaminput-delete-btn btn btn-dark" style="float: right; margin-top: 10px;" >Delete section</button>
+                                            <button type="button" class = "dreaminput-delete-btn btn btn-dark" style="float: right;
+                                                                    margin-top: 10px; margin-bottom:5px" >Delete section</button>
                                             <textarea name = "content" style = "min-height: 450px;" type="text" placeholder ="Well, there was a big cat and there was a big bike..."></textarea>
                                             <button type="button" class = "dreaminput-new-section-btn btn btn-secondary" style="margin-top: 10px; margin-bottom: 10px;" >Add new section</button>
                                             <div style = "margin-top:5px; margin-bottom:5px" class = "border-bottom border-3"></div>
@@ -105,7 +113,7 @@
 
                             <div class = "row">
                                 <div class = "col-12">
-                                    <input name = "externalId" style = "height: 40px" type = "text" placeholder = "Here you can create External ID, if you want"></inputane>
+                                    @*<input name = "externalId" style = "height: 40px" type = "text" placeholder = "Here you can create External ID, if you want"></inputane>*@
                                         <div class="form-check" style = "margin: 10px">
                               <input value="true" name = "isPublic" class="form-check-input" type="checkbox" id="flexCheckDefault"/>
                               <label style = "margin-top:0px"; class="form-check-label" for="flexCheckDefault">
@@ -122,53 +130,100 @@
                             </div>  
                             </div>
                             </div>
-                            <input name="authorId" hidden value = @ViewBag.Context.Id ></input>
+                            <input name="authorId" hidden value = @ViewBag.UserContext.Id ></input>
                         </form>
-                        
-                    <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
+         
+                    @if(ViewBag.Content == null)
+                    {
+                        <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                         <div class = "row ">
                             <div class = "col-4" style = "padding:10px;">                      
-                                <p class ="badge bg-secondary fs-5">Publication name</p>
+                                <p class ="badge bg-secondary text-center fs-4">Ooops :(</p>
                              </div>
-                            <div class = "col-4" style = "padding:10px;">
-                                <p class =" fs-5">publication date: 29.01.2222</p>
-                            </div>
-                            <div class = "col-3" style = "padding:10px; ">
-                                <p class =" fs-5">sleep duration: 7h</p>
 
+
+                        <div class = "row">
+                            <div class = "col fs-4 text-center" style="margin: 10px;">
+                                    You don't have any notes yet.
+                            </div>
+                        </div>
+                            <span class = "border-bottom border-3"></span>
+                              
+          
+                        
+                       
+                    </div>
+                     </div>
+                    }
+                    else {
+                    @foreach(DreamPublication publication in (List<DreamPublication>)ViewBag.Content)
+                    {
+                        string [] content = publication.Content.Split(DreamInput.splitContentMarker);
+
+                        <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
+                        <div class = "row ">
+                            <div class = "col-4 style="padding:10px;>          
+                                <p style="margin-top:10px;" class ="badge bg-secondary fs-5">
+                                    <a style="text-decoration:none; color: white;" asp-controller="User" asp-action="Dream"
+                                    asp-route-publicationId=@publication.Id>@publication.Name></a>
+                                 </p>
+                             </div>
+                            <div class = "col-3" style = "padding:10px;">
+                                    @{
+                                        string date = ((DateTime)publication.CreationDate).ToString("dd-MM-yyyy");
+                                    }
+                                <p class =" fs-5">Publication date: @date</p>
+                            </div>
+                            <div class = "col-2" style = "padding:10px; ">
+                                <p class =" fs-5">Sleep duration: @publication.Hours</p>
+
+                            </div>
+                            <div class = "col-1" style = "padding:10px; margin-right:15px;">
+                                
+                                @if (publication.Status)
+                                {
+                                    <p class =" fs-5">Public</p>
+                                }
+                                else
+                                {
+                                    <p class =" fs-5">Private</p>
+                                }
+                                        
+                                
+
+                            </div>
+                            <div class = "col-1">
+                                <form method="get" asp-controller="User" asp-action="RemoveDream">
+                                <input hidden name ="dreamId" value =@publication.Id></input>
+                                <input style = "float:right; margin-top:10px;" type="submit" value="Delete" class = "dream-delete-button btn btn-dark"/>
+                                </form>
                             </div>
 
                         </div>
                       
                         <div class = "row">
                             <div class = "col">  
-                                <p class = "fs-5 text-muted border border-2 rounded-3">topics</p>
-                            </div>
-                        </div>
-                        <div class = "row">
-                            <div class = "col fs-6" style="margin: 10px;">
-                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
-                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
+                                <p class = "fs-5 text-muted border border-2 rounded-3">Topics: @publication.Topics</p>
                             </div>
                         </div>
 
-                        <span class = "border-bottom border-3"></span>
-
-                        <div class = "row">
-                            <div class = "col fs-6" style="margin: 10px;">
-                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
-                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
-                            </div>
-                        </div>
-                        <span class = "border-bottom border-3"></span>
-
-                        <div class = "row">
-                            <div class = "col fs-6" style="margin: 10px;">
-                                   first storysdfsdfsdfsdfsf. SASFfdsdf sSDFsfsdf sfs <br></br>
-                                   sdfsdfsdfsfsdfsfsfsdfsdfxvcxvx  vxc v xv 
-                            </div>
-                        </div>
+                            
+                                @foreach(string str in content)
+                                {
+                                    <div class = "row">
+                                        <div class = "col fs-6" style="margin: 10px;">
+                                               @str
+                                        </div>
+                                    </div>
+                                     <span class = "border-bottom border-3"></span>
+                                }
+          
+                        
+                       
                     </div>
+                    }
+                    
+                    }
                 </div>
             </div>
         </div>

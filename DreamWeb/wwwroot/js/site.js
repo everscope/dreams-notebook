@@ -51,3 +51,7 @@ $(document).on('click', '.dreaminput-delete-btn', function () {
 $('.dream-input-cancel').click(function () {
     location.reload();
 })
+
+$(document).on('click', '.dream-delete-button', function () {
+    this.parentElement.parentElement.hide(200);
+})
