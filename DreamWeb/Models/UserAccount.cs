@@ -13,7 +13,5 @@ namespace DreamWeb.Models
         [Column("creation_time")]
         public DateTime CreationTime { get; set; }
 
-        //List<UserAccount> Followers { get; set; }
-        //List<UserAccount> Following { get; set; }
     }
 }

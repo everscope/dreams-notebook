@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
-builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<DreamInput, DreamInput>();
 builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("server = SCAT\\SQLEXPRESS; database = dreams_web; Trusted_Connection=True ; MultipleActiveResultSets = true"));
@@ -30,11 +29,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
 });
-
-//builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, options =>
-//{
-//    options.LoginPath = "/SignIn";
-//});
 
 var app = builder.Build();
 

@@ -30,14 +30,13 @@ namespace DreamWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<UserAccount> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IUserService _userService;
 
         public RegisterModel(
             UserManager<UserAccount> userManager,
             IUserStore<UserAccount> userStore,
             SignInManager<UserAccount> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender, IUserService service)
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,7 +44,6 @@ namespace DreamWeb.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _userService = service;
         }
 
 
@@ -64,12 +62,10 @@ namespace DreamWeb.Areas.Identity.Pages.Account
             public string? ExternalID { get; set; }
 
             [Required]
-            //[EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
-            //[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -85,13 +81,11 @@ namespace DreamWeb.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             var c = ModelState.Values.ToList();
             if (ModelState.IsValid)
             {
@@ -114,7 +108,6 @@ namespace DreamWeb.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

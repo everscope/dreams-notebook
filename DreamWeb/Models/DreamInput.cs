@@ -16,29 +16,6 @@
         private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
         public static string splitContentMarker { get; private set; } = "(%%#newpart#%%)";
 
-        //Status = input.IsPublic;
-        //    AuthorID = input.AuthorID;
-        //    CreationDate = input.CreationDate;
-        //    ExternalID = input.ExternalId;
-        //    InternalID = input.Id;
-        //    Topics = input.Topics;
-        //    Hours = input.Hours;
-        //    Content = input.Content;
-        //public DreamInput(string name, string topics, string hour, string[] context,
-        //                    string externalId, bool isPublic, string authorId, DreamsContext dbContext)
-        //{
-        //    Name = name;
-        //    Topics = topics;
-        //    Hours = hour;
-        //    Content = context;
-        //    ExternalId = externalId;
-        //    AuthorID = authorId;
-
-        //    CreationDate = DateTime.Now;
-
-        //    _dbContext = dbContext;
-        //}
-
         public DreamInput(DreamsContext dbContext)
         {
             _dbContext = dbContext;

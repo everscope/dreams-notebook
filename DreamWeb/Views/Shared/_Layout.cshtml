@@ -10,56 +10,26 @@
 </head>
 <body>
     <header class="menu">
-
         <div class="head-menu">
-        <div class="header-menu">
-            
-        <a  asp-controller="Home" asp-action= "Index">Dreams</a>
-        </div>
-
-        <div class="header-menu">
-         <a  asp-controller="User" asp-action= "User">My account</a>
-
-        </div>
-
-@*        <div class="header-menu">
-             <a  asp-controller="Home" asp-action= "Index">Explore</a> 
-        </div>*@
-
-        <div class="header-menu">  
-            <a  asp-controller="Home" asp-action= "Index">Contact developer</a>
+            <div class="header-menu">  
+                <a  asp-controller="Home" asp-action= "Index">Dreams</a>
+            </div>
+            <div class="header-menu">
+                <a  asp-controller="User" asp-action= "User">My account</a>
+            </div>
+            <div class="header-menu">  
+                <a  asp-controller="Home" asp-action= "Index">Contact developer</a>
             </div>
         </div>
 
-     @*       <form>  
-                <div class="header-menu">
-                    <input type="search" placeholder= "Search..."><br>
-                <div/>
-                <div class="header-menu">
-                    <input type="submit" value = "Go!">
-                </div>
-            </form>*@
-
-  
-
-       
-       
-      
-        
-
-
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-   @* <footer class=" border-top">
-        <div class="container">
-            &copy; 2021 - DreamWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
