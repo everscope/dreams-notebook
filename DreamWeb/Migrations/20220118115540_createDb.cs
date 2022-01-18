@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamWeb.Migrations
 {
-    public partial class test : Migration
+    public partial class createDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,6 @@ namespace DreamWeb.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    external_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     creation_time = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -58,7 +57,6 @@ namespace DreamWeb.Migrations
                     status = table.Column<bool>(type: "bit", nullable: false),
                     author_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     creation_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    external_id = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     topics = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     hours = table.Column<string>(type: "nvarchar(max)", nullable: false),

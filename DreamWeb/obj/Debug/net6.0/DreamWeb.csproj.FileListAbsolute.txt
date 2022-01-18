@@ -276,3 +276,9 @@ F:\Projects\Dreams\DreamWeb\DreamWeb\obj\Debug\net6.0\DreamWeb.MvcApplicationPar
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\MailKit.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\MimeKit.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\System.Data.SqlClient.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

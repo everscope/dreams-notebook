@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreamWeb.Migrations
 {
     [DbContext(typeof(DreamsContext))]
-    [Migration("20220115210531_test")]
-    partial class test
+    [Migration("20220118115540_createDb")]
+    partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace DreamWeb.Migrations
 
             modelBuilder.Entity("DreamWeb.Models.DreamPublication", b =>
                 {
-                    b.Property<string>("InternalID")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("internal_id");
 
@@ -43,10 +43,6 @@ namespace DreamWeb.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("creation_date");
-
-                    b.Property<string>("ExternalID")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("external_id");
 
                     b.Property<string>("Hours")
                         .IsRequired()
@@ -67,7 +63,7 @@ namespace DreamWeb.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("topics");
 
-                    b.HasKey("InternalID");
+                    b.HasKey("Id");
 
                     b.ToTable("dream_publications", (string)null);
                 });
@@ -94,10 +90,6 @@ namespace DreamWeb.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("external_id");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
