@@ -1,5 +1,4 @@
 using DreamWeb.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +9,7 @@ builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<DreamInput, DreamInput>();
 builder.Services.AddDbContext<DreamsContext>(options =>
-    options.UseSqlServer("server = SCAT\\SQLEXPRESS; database = dreams_web; Trusted_Connection=True ; MultipleActiveResultSets = true"));
+    options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True"));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
 builder.Services.AddTransient<IEmailService, EmailService>();

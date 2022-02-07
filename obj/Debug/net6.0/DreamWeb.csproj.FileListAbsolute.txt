@@ -282,3 +282,6 @@ F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win-x64\native\sn
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Azure.Core.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Azure.Identity.dll
+F:\Projects\Dreams\DreamWeb\DreamWeb\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll

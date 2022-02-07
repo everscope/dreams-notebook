@@ -11,9 +11,10 @@ namespace DreamWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DreamsContext dreamsContext)
         {
             _logger = logger;
+            dreamsContext.Database.EnsureCreated();
         }
 
         public IActionResult Index()
