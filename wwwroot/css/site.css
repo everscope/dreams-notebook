@@ -38,19 +38,6 @@ margin-top: 10px;
     color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 html {
     font-size: 14px;
 }
@@ -65,14 +52,6 @@ html {
   position: relative;
   min-height: 100%;
 }
-
-/*body {
-    margin-bottom: 60px;
-    padding-bottom: 60px;*/
-/*    background: #FAFAFA;*/
-/*}*/
-
-
 
 input[type = "password"], input[type = "text"], textarea {
     padding: 10px;
