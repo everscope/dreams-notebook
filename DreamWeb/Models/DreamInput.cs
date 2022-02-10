@@ -13,7 +13,7 @@
 
         private DreamsContext _dbContext;
 
-        private char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+        private readonly char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
         public static string splitContentMarker { get; private set; } = "(%%#newpart#%%)";
 
         public DreamInput(DreamsContext dbContext)
@@ -26,11 +26,6 @@
         {
             _dbContext.DreamPublications.Add(ToDreamPublication(this));
             await _dbContext.SaveChangesAsync();
-        }
-
-        public void EditDream()
-        {
-
         }
 
         public async Task RemoveDreamAsync(string id)
