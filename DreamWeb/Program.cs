@@ -1,3 +1,5 @@
+using DreamWeb.DAL;
+using DreamWeb.DAL.Entities;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +32,11 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 var app = builder.Build();
+
+using (var context = app.Services.GetService<DreamsContext>())
+{
+    context.Database.EnsureCreated();
+}
 
 if (!app.Environment.IsDevelopment())
 {

@@ -2,13 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DreamWeb.Models
+namespace DreamWeb.DAL.Entities
 {
     public class UserAccount : IdentityUser
-    { 
-
-        [Column("creation_time")]
+    {
         public DateTime CreationTime { get; set; }
-
+        public ICollection<DreamPublication> Dreams = new List<DreamPublication>();
     }
 }

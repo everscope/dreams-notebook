@@ -3,19 +3,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using DreamWeb.DAL;
 
 
 namespace DreamWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger, DreamsContext dreamsContext)
-        {
-            _logger = logger;
-            dreamsContext.Database.EnsureCreated();
-        }
+        ////called too often
+        //public HomeController(IDatabaseReader databaseReader)
+        //{
+        //}
 
         public IActionResult Index()
         {

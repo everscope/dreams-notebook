@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DreamWeb.DAL;
+using DreamWeb.DAL.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using DreamWeb.Models;
@@ -11,40 +13,44 @@ namespace DreamWeb.Controllers
     {
 
         private DreamInput _dreamService;
-        private DreamsContext _dreamsContext;
+        private IDatabaseReader _databaseReader;
 
-        public UserController (DreamInput dreamService, DreamsContext dbContext)
+        public UserController (DreamInput dreamService, IDatabaseReader databaseReader)
         {
             _dreamService = dreamService;
-            _dreamsContext = dbContext;
+            _databaseReader = databaseReader;
         }
 
         [Authorize]
-        public IActionResult User()
+        public async Task<IActionResult> User()
         {
-            var user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name);
-            ViewBag.UserContext = user;
-            if (_dreamsContext.DreamPublications.Any(p => p.AuthorID == user.Id))
-            {
-                var content = _dreamsContext.DreamPublications.Where(p => p.AuthorID == user.Id);
-                content.OrderByDescending(p => p.CreationDate);
+            //var user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name)
 
-                List <DreamPublication> publications = new List<DreamPublication>();
-                foreach (DreamPublication result in content)
-                {
-                    publications.Add(result);
-                }
-                ViewBag.Content = publications;
-            }
+            var user = await _databaseReader.GetUserAccountAsync(HttpContext.User.Identity.Name);
+            user.Dreams.OrderByDescending(p => p.CreationDate);
 
+            ViewBag.User = user;
+            //if (_dreamsContext.DreamPublications.Any(p => p.AuthorID == user.Id))
+            //{
+            //    var content = _dreamsContext.DreamPublications.Where(p => p.AuthorID == user.Id);
+            //    content.OrderByDescending(p => p.CreationDate);
+
+            //    List <DreamPublication> publications = new List<DreamPublication>();
+            //    foreach (DreamPublication result in content)
+            //    {
+            //        publications.Add(result);
+            //    }
+            //    ViewBag.Content = publications;
+            //}
             return View();
         }
 
         [HttpGet]
-        public IActionResult DreamsSort(int orderBy, DateTime date, string keyWords)
+        public async Task<IActionResult> DreamsSort(int orderBy, DateTime date, string keyWords)
         {
-            var user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name);
-            var content = _dreamsContext.DreamPublications.Where(p => p.AuthorID == user.Id);
+            var user = await _databaseReader.GetUserAccountAsync(HttpContext.User.Identity.Name);
+            //var user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name);
+            //var content = _dreamsContext.DreamPublications.Where(p => p.AuthorID == user.Id);
             ViewBag.UserContext = user;
 
             switch (orderBy)
@@ -109,11 +115,13 @@ namespace DreamWeb.Controllers
             foreach (DreamPublication dream in content)
             {
                 publications.Add(dream);
-            }           
+            }
+
             ViewBag.Content = publications;
             return View("User");
         }
 
+        //too much params
         [HttpPost]
         public async Task<IActionResult> AddDream(string dreamName, string topics, string hours,
                                           string[] content, bool isPublic, string authorId)
@@ -125,44 +133,54 @@ namespace DreamWeb.Controllers
             _dreamService.IsPublic = isPublic;
             _dreamService.AuthorId = authorId;
 
-            await _dreamService.AddDreamAsync();
+            await _databaseReader.AddDreamAsync(new DreamPublication());
 
             return RedirectToActionPermanent("User");
         }
-        
+
+
+        //why not authorized?
+        //what is RequestVerificationToken?
+        //why not httpDelete?
         [HttpGet]
         public async Task<IActionResult> RemoveDream(string dreamId, string RequestVerificationToken)
         {
-            var user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name);
-            var publication = _dreamsContext.DreamPublications.First(p => p.Id == dreamId);
-            if (user.Id == publication.AuthorID)
+            try
             {
-                await _dreamService.RemoveDreamAsync(dreamId);
+                await _databaseReader.DeleteDreamAsync(HttpContext.User.Identity.Name, dreamId);
             }
+            catch{}
+            
             return RedirectToActionPermanent("User");
         }
 
 
         [AllowAnonymous]
-        public IActionResult Dream(string publicationId)
+        public async Task<IActionResult> Dream(string publicationId)
         {
-            var publication = _dreamsContext.DreamPublications.First(p => p.Id == publicationId || p.Id == publicationId);
-            UserAccount user = null;
-
-            if (HttpContext.User.Identity.IsAuthenticated)
+            //var publication = _dreamsContext.DreamPublications.First(p => p.Id == publicationId || p.Id == publicationId);
+            try
             {
-                user = _dreamsContext.Users.First(p => p.UserName == HttpContext.User.Identity.Name);
-            }
-
-            if ((HttpContext.User.Identity.IsAuthenticated && user.Id == publication.AuthorID) 
-                || publication.Status)
-            {
+                var publication = await _databaseReader.GetDreamByIdAsync(publicationId);
+                bool isEditMode = false;
                 ViewBag.Publication = publication;
-                ViewBag.IsEditMode = (HttpContext.User.Identity.IsAuthenticated && user.Id == publication.AuthorID) ? true : false;
+
+                if ((HttpContext.User.Identity.IsAuthenticated &&
+                     publication.UserAccount.UserName == HttpContext.User.Identity.Name))
+                {
+                    isEditMode = true;
+                }
+                else if(!publication.IsPublic)
+                {
+                    throw new UnauthorizedAccessException();
+                }
+
                 return View();
             }
-
-            return StatusCode(404);
+            catch
+            {
+                return StatusCode(404);
+            }
         }
     }
 }
