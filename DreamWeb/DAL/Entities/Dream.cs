@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DreamWeb.DAL.Entities
 {
-    public class DreamPublication
+    public class Dream
     {
         public string Id { get; set; }
         public bool IsPublic { get; set; }

@@ -8,7 +8,7 @@ namespace DreamWeb.DAL
     public class DreamsContext : IdentityDbContext<UserAccount>
     {
         public DbSet<UserAccount> UserAccounts { get; set; }
-        public DbSet<DreamPublication> DreamPublications { get; set; }
+        public DbSet<Dream> DreamPublications { get; set; }
 
         public DreamsContext(DbContextOptions<DreamsContext> options) : base(options)
         {

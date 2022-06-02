@@ -1,6 +1,6 @@
 ﻿@{
     DreamPublication publication = ViewBag.Publication;
-    string [] content = publication.Content.Split(DreamInput.splitContentMarker); 
+    string [] content = publication.Content.Split(DreamInputModel.splitContentMarker); 
     ViewData["Title"] = publication.Id;
 }
 

@@ -135,7 +135,7 @@
                 else {
                     @foreach(DreamPublication publication in (List<DreamPublication>)ViewBag.Content)
                     {
-                        string [] content = publication.Content.Split(DreamInput.splitContentMarker);
+                        string [] content = publication.Content.Split(DreamInputModel.splitContentMarker);
 
                         <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                             <div class = "row ">

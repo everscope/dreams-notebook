@@ -1,4 +1,5 @@
-﻿using DreamWeb.DAL.Entities;
+﻿using System.Text;
+using DreamWeb.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamWeb.DAL
@@ -6,6 +7,7 @@ namespace DreamWeb.DAL
     public class DatabaseReaderSQL : IDatabaseReader
     {
         private readonly DreamsContext _context;
+        private readonly char[] internalIdChars = "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
 
         public DatabaseReaderSQL(DreamsContext context)
         {
@@ -18,7 +20,7 @@ namespace DreamWeb.DAL
                 .FirstAsync(p => p.UserName == username);
         }
 
-        public async Task AddDreamAsync(DreamPublication dream)
+        public async Task AddDreamAsync(Dream dream)
         {
             await _context.DreamPublications.AddAsync(dream);
             await _context.SaveChangesAsync();
@@ -31,9 +33,28 @@ namespace DreamWeb.DAL
             await _context.SaveChangesAsync();
         }
 
-        public async Task<DreamPublication> GetDreamByIdAsync(string id)
+        public async Task<Dream> GetDreamByIdAsync(string id)
         {
             return await _context.DreamPublications.FirstAsync(p => p.Id == id);
+        }
+
+        private string CreateInternalDreamId()
+        {
+            Random random = new Random();
+            StringBuilder idBuilder = new StringBuilder();
+            for (int i = 0; i < 12; i++)
+            {
+                idBuilder.Append(internalIdChars[random.Next(0, internalIdChars.Length)]);
+            }
+
+            string id = idBuilder.ToString();
+
+            if (_context.DreamPublications.Any(p => p.Id == id))
+            {
+                id = CreateInternalDreamId();
+            }
+
+            return id;
         }
     }
 }

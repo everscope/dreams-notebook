@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
-builder.Services.AddScoped<DreamInput, DreamInput>();
+builder.Services.AddScoped<DreamInputModel, DreamInputModel>();
 builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True"));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
