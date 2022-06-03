@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
+using DreamWeb.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Identity;

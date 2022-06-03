@@ -5,7 +5,7 @@ namespace DreamWeb.DAL
     public interface IDatabaseReader
     {
         public Task<UserAccount> GetUserAccountByUsernameAsync(string username);
-        public Task AddDreamAsync(Dream dream);
+        public Task AddDreamAsync(Dream dream, string username);
         public Task DeleteDreamAsync(string username, string dreamId);
         public Task<Dream> GetDreamByIdAsync(string id);
     }

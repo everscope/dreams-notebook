@@ -16,10 +16,9 @@ namespace DreamWeb.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserAccount>()
-                .HasMany(p => p.Dreams)
-                .WithOne(p => p.UserAccount)
-                .HasForeignKey(p => p.Id)
+            modelBuilder.Entity<Dream>()
+                .HasOne(p => p.UserAccount)
+                .WithMany(p => p.Dreams)
                 .OnDelete(DeleteBehavior.Cascade);
             //modelBuilder.Entity<DreamPublication>().ToTable("dream_publications");
 

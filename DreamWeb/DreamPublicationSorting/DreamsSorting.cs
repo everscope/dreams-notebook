@@ -2,12 +2,8 @@
 
 namespace DreamWeb.DreamPublicationSorting
 {
-    public class DreamsSorting
+    public class DreamsSorting : IDreamsSorting
     {
-        protected int _sortingCase;
-        protected DateTime _dateTime;
-        protected string[] _keyWords;
-
         public List<Dream> SortByOrder(IEnumerable<Dream> dreams, int sortingCase)
         {
             IEnumerable<Dream> sorted;

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using DreamWeb.DAL.Entities;
+using MailKit;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamWeb.DAL
@@ -20,17 +21,25 @@ namespace DreamWeb.DAL
                 .FirstAsync(p => p.UserName == username);
         }
 
-        public async Task AddDreamAsync(Dream dream)
+        public async Task AddDreamAsync(Dream dream, string username)
         {
-            await _context.DreamPublications.AddAsync(dream);
+            dream.Id = CreateInternalDreamId();
+            _context.UserAccounts.First(p => p.UserName == username).Dreams.Add(dream);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteDreamAsync(string username, string dreamId)
         {
-            var dream = _context.Users.First(p => p.UserName == username).Dreams.First(p => p.Id == dreamId);
-            _context.DreamPublications.Remove(dream);
-            await _context.SaveChangesAsync();
+            var dream = _context.DreamPublications.Include(p=> p.UserAccount).First(p => p.Id == dreamId);
+            if (dream.UserAccount.UserName == username)
+            {
+                _context.DreamPublications.Remove(dream);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new UnauthorizedAccessException();
+            }
         }
 
         public async Task<Dream> GetDreamByIdAsync(string id)

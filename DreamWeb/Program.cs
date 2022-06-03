@@ -1,5 +1,6 @@
 using DreamWeb.DAL;
 using DreamWeb.DAL.Entities;
+using DreamWeb.DreamPublicationSorting;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,9 @@ builder.Services.AddDbContext<DreamsContext>(options =>
     options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True"));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
+builder.Services.AddTransient<IDatabaseReader, DatabaseReaderSQL>();
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IDreamsSorting, DreamsSorting>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddAuthentication().AddCookie();
 
@@ -33,7 +37,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 var app = builder.Build();
 
-using (var context = app.Services.GetService<DreamsContext>())
+using (var context = new DreamsContext (new DbContextOptionsBuilder<DreamsContext>()
+    .UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True").Options))
 {
     context.Database.EnsureCreated();
 }

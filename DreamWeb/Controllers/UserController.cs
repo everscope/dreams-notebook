@@ -26,14 +26,13 @@ namespace DreamWeb.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> User()
         {
             var user = await _databaseReader.GetUserAccountByUsernameAsync(HttpContext.User.Identity.Name);
             user.Dreams.OrderByDescending(p => p.CreationDate);
 
             ViewBag.User = user;
-           //add user.context to view
             return View();
         }
 
@@ -62,22 +61,20 @@ namespace DreamWeb.Controllers
             return View("User");
         }
 
-//too much params
         [HttpPost]
         public async Task<IActionResult> AddDream(DreamInputModel dream)
         {
-            Dream dreamToSay = _mapper.Map<Dream>(dream);
+            Dream dreamToSave = _mapper.Map<Dream>(dream);
 
-            await _databaseReader.AddDreamAsync(new Dream());
+            await _databaseReader.AddDreamAsync(dreamToSave, HttpContext.User.Identity.Name);
 
             return RedirectToActionPermanent("User");
         }
 
-
-        //why not authorized?
         //what is RequestVerificationToken?
         //why not httpDelete?
-        [HttpGet]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> RemoveDream(string dreamId, string RequestVerificationToken)
         {
             try

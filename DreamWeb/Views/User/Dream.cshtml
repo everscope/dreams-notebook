@@ -1,6 +1,7 @@
-﻿@{
-    DreamPublication publication = ViewBag.Publication;
-    string [] content = publication.Content.Split(DreamInputModel.splitContentMarker); 
+﻿@using DreamWeb.DAL.Entities
+@{
+    Dream publication = ViewBag.Publication;
+    string [] content = DreamContentConverter.Split(publication.Content); 
     ViewData["Title"] = publication.Id;
 }
 
@@ -22,7 +23,7 @@
             <p class =" fs-5">Sleep duration: @publication.Hours</p>
         </div>
         <div class = "col-1" style = "padding:10px; margin-right:15px;">                   
-            @if (publication.Status)
+            @if (publication.IsPublic)
             {
                 <p class =" fs-5">Public</p>
             }

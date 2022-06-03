@@ -4,6 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
+using DreamWeb.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Identity;

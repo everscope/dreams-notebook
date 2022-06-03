@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using DreamWeb.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using DreamWeb.Models;
 using Microsoft.AspNetCore.Authentication;

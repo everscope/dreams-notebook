@@ -1,4 +1,5 @@
-﻿@{
+﻿@using DreamWeb.DAL.Entities
+@{
     ViewData["Title"] = "User";
 }
 
@@ -15,7 +16,7 @@
             <div class = "col-2 text fs-4 " style = "margin-top:20px; "> 
                 <div style="border: 2px solid grey; border-radius: 5px; padding:10px;" >
                     <div class = "border-bottom border-2 ">
-                        @ViewBag.UserContext.UserName
+                        @ViewBag.User.UserName
                     </div>
                     <div>
                         <a style="text-decoration:none; color: black" href="../../Identity/Account/Manage/Index">Settings</a>
@@ -64,8 +65,8 @@
                     <div  class = "dreamstory-input" style = "border-radius: 5px; border: 2px solid grey; margin-left: 10px; margin-top: 10px;padding:10px;">
                         <div class = "row">
                             <div class ="col-12" style="">
-                                <label class = "fs-5">Dream's name</a></label>
-                                <input required class = "dreams-input-trigger-main" name="dreamName" type="text" placeholder ="My dream will be named..."/>
+                                <label class = "fs-5">Dream's name</label>
+                                <input required class = "dreams-input-trigger-main" name="name" type="text" placeholder ="My dream will be named..."/>
                             </div>
                         </div>
                         <div class = "row" style = "padding-bottom: 20px;">
@@ -113,10 +114,10 @@
                             </div>  
                         </div>
                     </div>
-                        <input name="authorId" hidden value = @ViewBag.UserContext.Id ></input>
+                        <input name="authorId" hidden value = @ViewBag.User.Id ></input>
                 </form>
          
-                @if(ViewBag.Content == null)
+                @if(ViewBag.User.Dreams == null)
                 {
                     <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                         <div class = "row ">
@@ -133,9 +134,9 @@
                     </div>
                 }
                 else {
-                    @foreach(DreamPublication publication in (List<DreamPublication>)ViewBag.Content)
+                    @foreach(Dream publication in (List<Dream>)ViewBag.User.Dreams)
                     {
-                        string [] content = publication.Content.Split(DreamInputModel.splitContentMarker);
+                        string [] content = DreamContentConverter.Split(publication.Content);
 
                         <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                             <div class = "row ">
@@ -155,7 +156,7 @@
                                     <p class =" fs-5">Sleep duration: @publication.Hours</p>
                                 </div>
                                 <div class = "col-1" style = "padding:10px; margin-right:15px;">
-                                    @if (publication.Status)
+                                    @if (publication.IsPublic)
                                     {
                                         <p class =" fs-5">Public</p>
                                     }
@@ -165,7 +166,7 @@
                                     }
                                 </div>
                                 <div class = "col-1">
-                                    <form method="get" asp-controller="User" asp-action="RemoveDream">
+                                    <form method="post" asp-controller="User" asp-action="RemoveDream">
                                         <input hidden name ="dreamId" value =@publication.Id></input>
                                         <input style = "float:right; margin-top:10px;" type="submit" value="Delete" class = "dream-delete-button btn btn-dark"/>
                                     </form>

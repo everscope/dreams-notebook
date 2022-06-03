@@ -6,7 +6,7 @@ namespace DreamWeb
     {
         private static readonly string splitContentMarker = "(%%#newpart#%%)";
 
-        public static string Convert(string [] content)
+        public static string Concatenate(string [] content)
         {
             StringBuilder resultBuilder = new();
             for (int i = 0; i < content.Length - 1; i++)
@@ -14,7 +14,14 @@ namespace DreamWeb
                 resultBuilder.Append(content[i] + splitContentMarker);
             }
 
+            resultBuilder.Append(content[^1]);
+
             return resultBuilder.ToString();
+        }
+
+        public static string[] Split(string content)
+        {
+            return content.Split(splitContentMarker);
         }
     }
 }
