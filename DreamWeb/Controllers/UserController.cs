@@ -73,11 +73,9 @@ namespace DreamWeb.Controllers
             return RedirectToActionPermanent("User");
         }
 
-        //what is RequestVerificationToken?
-        //why not httpDelete?
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> RemoveDream(string dreamId, string RequestVerificationToken)
+        public async Task<IActionResult> RemoveDream(string dreamId)
         {
             try
             {
