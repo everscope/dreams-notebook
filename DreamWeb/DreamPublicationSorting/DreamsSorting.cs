@@ -41,8 +41,6 @@ namespace DreamWeb.DreamPublicationSorting
         {
             List<Dream> sorted = new();
 
-            //sorted.Append(dreams.Where(p => p.Content.Contains(keyWords)));
-
             foreach (string key in keyWords)
             {
                 foreach (var dream in dreams)
@@ -55,36 +53,6 @@ namespace DreamWeb.DreamPublicationSorting
             }
 
             return sorted;
-
-            //if (keyWords != null)
-            //{
-            //    List<DreamPublication> result = new List<DreamPublication>();
-
-
-
-            //    var resultTemp = dreams.Where(p => p.Content.Contains(keyWords));
-
-            //    foreach (DreamPublication dream in resultTemp)
-            //    {
-            //        result.Add(dream);
-            //    }
-
-            //    foreach (string key in keys)
-            //    {
-            //        var thisSearch = content.Where(p => p.Content.Contains(key));
-            //        List<DreamPublication> tempList = new List<DreamPublication>();
-
-            //        foreach (DreamPublication dream in thisSearch)
-            //        {
-            //            if (!result.Contains(dream))
-            //            {
-            //                tempList.Add(dream);
-            //            }
-            //        }
-
-            //        result.AddRange(tempList);
-            //    }
-            //}
         }
 
 
