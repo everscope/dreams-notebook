@@ -43,7 +43,7 @@ namespace DreamWeb.Controllers
             var dreams = user.Dreams.ToList();
 
             ViewBag.UserContext = user;
-            string[] keys = keyWords.Split(new char[] {' ', ',', '.'});
+            string[] keys = keyWords?.Split(new char[] {' ', ',', '.'});
 
             List<Dream> result = _dreamsSorting.SortByOrder(dreams, orderBy);
 
@@ -52,12 +52,14 @@ namespace DreamWeb.Controllers
                 result = _dreamsSorting.SortByDate(result, date);
             }
 
-            if (keys.Length > 0)
+            if (keys is {Length: > 0})
             {
                 result = _dreamsSorting.SortByKeyWords(result, keys);
             }
 
-            ViewBag.Content = result;
+            user.Dreams = result;
+            ViewBag.User = user;
+
             return View("User");
         }
 

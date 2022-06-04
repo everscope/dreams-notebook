@@ -8,7 +8,7 @@ namespace DreamWeb.DAL.Entities
     {
         public string Id { get; set; }
         public bool IsPublic { get; set; }
-        //public string AuthorID { get; set; }
+        public string AuthorID { get; set; }
         public UserAccount UserAccount { get; set; }
         public DateTime CreationDate { get; set; }
         public string Topics { get; set; }

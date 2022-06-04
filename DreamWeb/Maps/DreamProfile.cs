@@ -10,7 +10,7 @@ namespace DreamWeb.Maps
         {
             CreateMap<DreamInputModel, Dream>()
                 .ForMember(p => p.Content, p => p.MapFrom(src => DreamContentConverter.Concatenate(src.Content)))
-                .ForMember(p => p.CreationDate, p => p.MapFrom(src => DateTime.Now));
+                .ForMember(p => p.CreationDate, p => p.MapFrom(src => DateTime.Now.Date));
         }
     }
 }

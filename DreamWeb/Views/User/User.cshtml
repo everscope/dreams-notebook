@@ -140,15 +140,15 @@
 
                         <div class = "row" style="border: 2px solid grey; border-radius: 5px; margin-top:10px; margin-left: 10px;">
                             <div class = "row ">
-                                <div class = "col-4 overflow-hidden">          
+                                <div class = "col-3 overflow-hidden">          
                                     <p style="margin-top:10px;" class ="badge bg-secondary fs-5">
                                         <a style="text-decoration:none; color: white;" asp-controller="User" asp-action="Dream"
                                         asp-route-publicationId=@publication.Id>@publication.Name</a>
                                     </p>
                                 </div>
-                                <div class = "col-3" style = "padding:10px;">
+                                <div class = "col-4" style = "padding:10px;">
                                     @{
-                                        string date = ((DateTime)publication.CreationDate).ToString("dd-MM-yyyy");
+                                        string date = (publication.CreationDate).ToString("dd.MM.yy");
                                     }
                                     <p class =" fs-5">Publication date: @date</p>
                                 </div>
@@ -175,7 +175,7 @@
                       
                             <div class = "row">
                                 <div class = "col">  
-                                    <p class = "fs-5 text-muted border border-2 rounded-3">Topics: @publication.Topics</p>
+                                    <p class = "fs-5 text-muted border border-2 rounded-3" style="padding: 5px">Topics: @publication.Topics</p>
                                 </div>
                             </div>
                             @foreach(string str in content)

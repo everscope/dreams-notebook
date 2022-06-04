@@ -8,5 +8,7 @@ namespace DreamWeb.DAL.Entities
     {
         public DateTime CreationTime { get; set; }
         public ICollection<Dream> Dreams = new List<Dream>();
+        
+        public int Id;
     }
 }

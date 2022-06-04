@@ -15,7 +15,7 @@
         </div>
         <div class = "col-3" style = "padding:10px;">
             @{
-            string date = ((DateTime)publication.CreationDate).ToString("dd-MM-yyyy");
+            string date = (publication.CreationDate).ToString("dd.MM.yy");
             }
             <p class =" fs-5">Publication date: @date</p>
         </div>

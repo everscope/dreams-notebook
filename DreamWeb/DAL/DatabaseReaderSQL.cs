@@ -30,16 +30,18 @@ namespace DreamWeb.DAL
 
         public async Task DeleteDreamAsync(string username, string dreamId)
         {
-            var dream = _context.DreamPublications.Include(p=> p.UserAccount).First(p => p.Id == dreamId);
-            if (dream.UserAccount.UserName == username)
-            {
+            var dream = _context.UserAccounts.Include(p => p.Dreams).First(p => p.UserName == username)
+                .Dreams.First(p => p.Id == dreamId);
+            //var dream = _context.DreamPublications.Include(p=> p.UserAccount).First(p => p.Id == dreamId);
+            //if (dream.UserAccount.UserName == username)
+            //{
                 _context.DreamPublications.Remove(dream);
                 await _context.SaveChangesAsync();
-            }
-            else
-            {
-                throw new UnauthorizedAccessException();
-            }
+            //}
+            //else
+            //{
+            //    throw new UnauthorizedAccessException();
+            //}
         }
 
         public async Task<Dream> GetDreamByIdAsync(string id)
