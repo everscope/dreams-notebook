@@ -2,11 +2,9 @@
 using DreamWeb.DAL;
 using DreamWeb.DAL.Entities;
 using DreamWeb.DreamPublicationSorting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using DreamWeb.Models;
-using Microsoft.AspNetCore.Identity;
 
 namespace DreamWeb.Controllers
 {

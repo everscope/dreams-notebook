@@ -1,6 +1,5 @@
 ﻿using DreamWeb.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DreamWeb.DAL
@@ -20,7 +19,6 @@ namespace DreamWeb.DAL
                 .HasMany(p => p.Dreams)
                 .WithOne(p => p.UserAccount)
                 .OnDelete(DeleteBehavior.Cascade);
-            //modelBuilder.Entity<DreamPublication>().ToTable("dream_publications");
 
             base.OnModelCreating(modelBuilder);
         }

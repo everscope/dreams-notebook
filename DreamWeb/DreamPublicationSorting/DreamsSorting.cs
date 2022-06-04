@@ -54,7 +54,5 @@ namespace DreamWeb.DreamPublicationSorting
 
             return sorted;
         }
-
-
     }
 }

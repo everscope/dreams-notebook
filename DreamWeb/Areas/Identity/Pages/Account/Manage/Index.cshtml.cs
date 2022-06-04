@@ -2,10 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using DreamWeb.DAL;
 using DreamWeb.DAL.Entities;
 using DreamWeb.Models;
@@ -19,16 +16,16 @@ namespace DreamWeb.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly SignInManager<UserAccount> _signInManager;
-        private readonly DreamsContext _dbContext;
+        private readonly IDatabaseReader _databaseReader;
 
         public IndexModel(
             UserManager<UserAccount> userManager,
             SignInManager<UserAccount> signInManager,
-            DreamsContext dbContext)
+            IDatabaseReader databaseReader)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _dbContext = dbContext;
+            _databaseReader = databaseReader;
         }
 
         public string Username { get; set; }
@@ -87,7 +84,7 @@ namespace DreamWeb.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            if ((Input.UserName != Username) && !_dbContext.Users.Any(p => p.UserName == Username))
+            if ((Input.UserName != Username) && ! await _databaseReader.IsEmailTaken(Username))
             {
                 var setUserName = await _userManager.SetUserNameAsync(user, Input.UserName);
                 if (!setUserName.Succeeded)

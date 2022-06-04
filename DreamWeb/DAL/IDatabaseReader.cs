@@ -8,5 +8,7 @@ namespace DreamWeb.DAL
         public Task AddDreamAsync(Dream dream, string username);
         public Task DeleteDreamAsync(string username, string dreamId);
         public Task<Dream> GetDreamByIdAsync(string id);
+        public Task<bool> IsEmailTaken(string email);
+        public Task<bool> IsUsernameTaken(string username);
     }
 }

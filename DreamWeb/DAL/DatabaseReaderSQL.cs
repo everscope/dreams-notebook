@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using DreamWeb.DAL.Entities;
-using MailKit;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamWeb.DAL
@@ -40,6 +39,16 @@ namespace DreamWeb.DAL
         {
             return await _context.DreamPublications.AsNoTracking().Include(p => p.UserAccount)
                 .FirstAsync(p => p.Id == id);
+        }
+
+        public async Task<bool> IsEmailTaken(string email)
+        {
+            return await _context.UserAccounts.AnyAsync(p => p.Email == email);
+        }
+
+        public async Task<bool> IsUsernameTaken(string username)
+        {
+            return await _context.UserAccounts.AnyAsync(p => p.UserName == username);
         }
 
         private string CreateInternalDreamId()

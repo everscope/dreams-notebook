@@ -1,27 +1,20 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-using System;
-using System.Threading.Tasks;
 using DreamWeb.DAL.Entities;
-using DreamWeb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace DreamWeb.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<UserAccount> _userManager;
-        private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<UserAccount> userManager,
-            ILogger<PersonalDataModel> logger)
+            UserManager<UserAccount> userManager)
         {
             _userManager = userManager;
-            _logger = logger;
         }
 
         public async Task<IActionResult> OnGet()

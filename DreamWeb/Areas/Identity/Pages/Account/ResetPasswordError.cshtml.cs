@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace DreamWeb.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class ResetPasswordConfirmationModel : PageModel
+    public class ResetPasswordErrorModel : PageModel
     {
         public void OnGet()
         {
