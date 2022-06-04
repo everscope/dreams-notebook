@@ -32,21 +32,14 @@ namespace DreamWeb.DAL
         {
             var dream = _context.UserAccounts.Include(p => p.Dreams).First(p => p.UserName == username)
                 .Dreams.First(p => p.Id == dreamId);
-            //var dream = _context.DreamPublications.Include(p=> p.UserAccount).First(p => p.Id == dreamId);
-            //if (dream.UserAccount.UserName == username)
-            //{
-                _context.DreamPublications.Remove(dream);
-                await _context.SaveChangesAsync();
-            //}
-            //else
-            //{
-            //    throw new UnauthorizedAccessException();
-            //}
+            _context.DreamPublications.Remove(dream);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Dream> GetDreamByIdAsync(string id)
         {
-            return await _context.DreamPublications.FirstAsync(p => p.Id == id);
+            return await _context.DreamPublications.AsNoTracking().Include(p => p.UserAccount)
+                .FirstAsync(p => p.Id == id);
         }
 
         private string CreateInternalDreamId()

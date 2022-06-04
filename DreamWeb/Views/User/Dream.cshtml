@@ -33,7 +33,7 @@
             }
         </div>
         <div class = "col-1">
-            <form method="get" asp-controller="User" asp-action="RemoveDream">
+            <form method="post" asp-controller="User" asp-action="RemoveDream">
             <input hidden name ="dreamId" value =@publication.Id>
             <input style = "float:right; margin-top:10px;" type="submit" value="Delete" class = "dream-delete-button btn btn-dark"/>
             </form>
@@ -42,17 +42,17 @@
                       
     <div class = "row">
         <div class = "col">  
-            <p class = "fs-5 text-muted border border-2 rounded-3">Topics: @publication.Topics</p>
+            <p class = "fs-5 text-muted border border-2 rounded-3" style="padding: 5px">Topics: @publication.Topics</p>
         </div>
     </div>
            
     @foreach(string str in content)
     {
         <div class = "row">
-            <div class = "col fs-6" style="margin: 10px;">
-                <textarea readonly style="border:none">
+            <div class = "col fs-4" style="margin: 10px">
+                <p readonly style="border:none">
                     @str
-                </textarea>
+                </p>
             </div>
         </div>
             <span class = "border-bottom border-3"></span>
