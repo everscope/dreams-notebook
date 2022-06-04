@@ -1,46 +1,44 @@
 ﻿@page
 @model LoginModel
-
 @{
     ViewData["Title"] = "Sign in";
 }
-
-        <div class ="auth-error">@ViewBag.Error</div>
-        <section>
-        <form id="account" method="post">
-       <div class = "container log-in-form" style="margin-top: 10%;">
+<div class ="auth-error">@ViewBag.Error</div>
+<section>
+    <form id="account" method="post">
+        <div class = "container log-in-form" style="margin-top: 10%;">
             <div class = "row justify-content-center align-items-center">
-            <div class = "col-4 " style = "border: 2px solid grey; border-radius: 5px; padding: 20px;">
-            
-            <div class="label-for-form" >Sign in</div>
-            <div class="log-in-up">
-                <input asp-for="Input.Login" autocomplete="username" aria-required="true" required>
-                <label asp-for="Input.Login">Your login</label><br>
-                <span asp-validation-for="Input.Login" class="text-danger"></span>
+                <div class = "col-4 " style = "border: 2px solid grey; border-radius: 5px; padding: 20px;">
+                    <div class="label-for-form" >Sign in</div>
+                    <div class="log-in-up">
+                        <input asp-for="Input.Login" autocomplete="username" aria-required="true" required>
+                        <label asp-for="Input.Login">Your login</label><br>
+                        <span asp-validation-for="Input.Login" class="text-danger"></span>
+                    </div>
+                    <div class="log-in-up"  >
+                        <input asp-for="Input.Password" autocomplete="current-password" aria-required="true"  required>
+                        <label asp-for="Input.Password">Your password</label><br>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <button id="loginSubmit" type="submit" class="w-100 btn btn-lg btn-secondary greyInput" style="margin-bottom: 20px;">Sign In</button>
+                    <div class = "sign-in-up-link" >
+                        <a  asp-area="Identity" asp-page="Register">
+                            <p>
+                            Sign Up
+                        </a>
+                        <a asp-area="Identity" asp-page="ForgotPassword"><p>Forgot you password? :(</a>
+                    </div>
+                </div>
             </div>
-            <div class="log-in-up"  >
-                <input asp-for="Input.Password" autocomplete="current-password" aria-required="true"  required>
-                <label asp-for="Input.Password">Your password</label><br>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="checkbox">
-                <label asp-for="Input.RememberMe" class="form-label">
-                    <input class="form-check-input" asp-for="Input.RememberMe" />
-                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                </label>
-            </div>
-             <button id="loginSubmit" type="submit" class="w-100 btn btn-lg btn-secondary greyInput" style="margin-bottom: 20px;">Sign In</button>
-            <div class = "sign-in-up-link" >
-                <a  asp-area="Identity" asp-page="Register"><p>Sign Up</a>
-                <a asp-area="Identity" asp-page="ForgotPassword"><p>Forgot you password? :(</a>
-            </div>
-             
-             </div>
-             </div>
         </div>
-         </form> 
-         </section>
-
+    </form>
+</section>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

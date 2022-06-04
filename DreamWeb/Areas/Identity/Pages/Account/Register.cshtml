@@ -1,65 +1,53 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+ViewData["Title"] = "Register";
 }
-        <section>
-
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div class = "text-center" style = "margin-top: 5%;">
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                <span asp-validation-for="Input.ExternalID" class="text-danger"></span>
-                <span asp-validation-for="Input.NickName" class="text-danger"></span>
-            <div asp-validation-summary="ModelOnly" class="text-danger fs-3"></div>
-            </div>
-       <div class = "container log-in-form" style="margin-top: 10%;">
-            <div class = "row justify-content-center align-items-center">
-            <div class = "col-4 " style = "border: 2px solid grey; border-radius: 5px; padding: 20px;">
-                        
-
-            <div class="label-for-form" >Sign up</div>
-
-
-            <div class="log-in-up">
-                <input asp-for="Input.NickName" autocomplete="username" aria-required="true">
-                <label asp-for="Input.NickName">Your login</label><br>
-
-            </div>
-            <div class="log-in-up"  >
-                <input asp-for="Input.Password" autocomplete="new-password" aria-required="true">
-                <label asp-for="Input.Password">Your password</label><br>
-                
-            </div>
-              <div class="log-in-up"  >
-                <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true">
-  
-                <label asp-for="Input.ConfirmPassword">Repeat your password</label><br>
-
-            </div>
-            <div class="log-in-up">
-                <input asp-for="Input.Email" autocomplete="custom-id" aria-required="true"  >
-                <label asp-for="Input.Email">Your email</label><br>
-               
-            </div>
-            <div class="log-in-up">
-                <input asp-for="Input.ExternalID" autocomplete="custom-id" aria-required="true">
-                <label asp-for="Input.ExternalID">Your custom ID</label><br>
-               
-            </div class = "greyInput">
-             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px;">Sign Up</button>
-
-            <div class = "sign-in-up-link">
-                <a  asp-area="Identity" asp-page="Login"><p>Sign In</a>
-            </div>
-             
-             </div>
-             </div>
+<section>
+  <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    <div class = "text-center" style = "margin-top: 5%;">
+      <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+      <span asp-validation-for="Input.Password" class="text-danger"></span>
+      <span asp-validation-for="Input.Email" class="text-danger"></span>
+      <span asp-validation-for="Input.ExternalID" class="text-danger"></span>
+      <span asp-validation-for="Input.NickName" class="text-danger"></span>
+      <div asp-validation-summary="ModelOnly" class="text-danger fs-3"></div>
+    </div>
+    <div class = "container log-in-form" style="margin-top: 10%;">
+      <div class = "row justify-content-center align-items-center">
+        <div class = "col-4 " style = "border: 2px solid grey; border-radius: 5px; padding: 20px;">
+          <div class="label-for-form" >Sign up</div>
+          <div class="log-in-up">
+            <input asp-for="Input.NickName" autocomplete="username" aria-required="true">
+            <label asp-for="Input.NickName">Your login</label><br>
+          </div>
+          <div class="log-in-up"  >
+            <input asp-for="Input.Password" autocomplete="new-password" aria-required="true">
+            <label asp-for="Input.Password">Your password</label><br>
+          </div>
+          <div class="log-in-up"  >
+            <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true">
+            <label asp-for="Input.ConfirmPassword">Repeat your password</label><br>
+          </div>
+          <div class="log-in-up">
+            <input asp-for="Input.Email" autocomplete="custom-id" aria-required="true"  >
+            <label asp-for="Input.Email">Your email</label><br>
+          </div>
+          <div class="log-in-up">
+            <input asp-for="Input.ExternalID" autocomplete="custom-id" aria-required="true">
+            <label asp-for="Input.ExternalID">Your custom ID</label><br>
+          </div>
+          <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-secondary" style="margin-bottom: 20px;">Sign Up</button>
+          <div class = "sign-in-up-link">
+            <a  asp-area="Identity" asp-page="Login">
+              <p>Sign In
+            </a>
+          </div>
         </div>
-         </form> 
-         </section>
-
+      </div>
+    </div>
+  </form>
+</section>
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

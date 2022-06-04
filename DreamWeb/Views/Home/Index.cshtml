@@ -1,54 +1,52 @@
 ﻿@{
-    ViewData["Title"] = "Main";
+ViewData["Title"] = "Main";
 }
 <!DOCTYPE html>  
 <html>
-<head>
+  <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
+  </head>
+  <body>
     <div class="container  site-name-main">
-        <div class ="row justify-content-center align-items-center ">
-            <div class=" col-12 text-center">
-                <h5>
-                    <small class="text-muted ">Notebook for</small> <br/>
-                </h5>
-            </div>
+      <div class ="row justify-content-center align-items-center ">
+        <div class=" col-12 text-center">
+          <h5>
+            <small class="text-muted ">Notebook for</small> <br/>
+          </h5>
         </div>
-        <div class ="row justify-content-center align-items-center">
-            <div class=" col-12 text-center">
-                <h1>
-                    <span class="badge bg-secondary align-middle fs-1 text">Dreams</span>
-                </h1>
-            </div>
+      </div>
+      <div class ="row justify-content-center align-items-center">
+        <div class=" col-12 text-center">
+          <h1>
+            <span class="badge bg-secondary align-middle fs-1 text">Dreams</span>
+          </h1>
         </div>
+      </div>
     </div>
     <div class = "container border border-secondary rounded-3 border-2" style="padding: 20px" >
-        <div class="row align-items-center ">
-            <div class=" col-8 border-end border-2  ">
-                <p class ="fs-3 text">What is Dreams?</p>
-                <p class = "fs-5 text">It's a notebook which is specialized on noting your dreams.<br></p>
-                <p class ="fs-3 text"> What is difference between Dreams and usual notebook?</p>
-                <p class = "fs-5 text">In Dreams you can add different stories to one note, because usually we have a few dreams during the night. In Dreams you 
-                can watch time you've spent asleep, organize your dreams by topics and share you dreams with other people, if you want.<br></p>
-                <p class ="fs-3 text"> What other users will see about me?<br></p>
-                <p class = "fs-5 text">If you don't want, users won't see you profile and won't be able to find any of your dreams. But if you want you can use your
-                account as in other social networks: share dreams, read dreams of other people.<br><br></p>
-            </div>
-
-            <div class ="col-4">
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + "Identity/Account/Register" + "'")">Sign Up</button> 
-
-                    <button type="button" class="btn btn-secondary btn-lg"  onclick="@("window.location.href='" +"Identity/Account/Login" + "'")">Sign In</button>
-                    <p class = "fs-5 text text-center" >If you don't have account, you can create it</p>
-                    <p class = "fs-5 text text-center">If you have account, you can sign in</p>
-                </div>
-            </div>        
-        </div>  
+      <div class="row align-items-center ">
+        <div class=" col-8 border-end border-2  ">
+          <p class ="fs-3 text">What is Dreams?</p>
+          <p class = "fs-5 text">It's a notebook which is specialized on noting your dreams.<br></p>
+          <p class ="fs-3 text"> What is difference between Dreams and usual notebook?</p>
+          <p class = "fs-5 text">In Dreams you can add different stories to one note, because usually we have a few dreams during the night. In Dreams you 
+            can watch time you've spent asleep, organize your dreams by topics and share you dreams with other people, if you want.<br>
+          </p>
+          <p class ="fs-3 text"> What other users will see about me?<br></p>
+          <p class = "fs-5 text">If you don't want, users won't see you profile and won't be able to find any of your dreams. But if you want you can use your
+            account as in other social networks: share dreams, read dreams of other people.<br><br>
+          </p>
+        </div>
+        <div class ="col-4">
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-secondary btn-lg" onclick="@("window.location.href='" + "Identity/Account/Register" + "'")">Sign Up</button> 
+            <button type="button" class="btn btn-secondary btn-lg"  onclick="@("window.location.href='" +"Identity/Account/Login" + "'")">Sign In</button>
+            <p class = "fs-5 text text-center" >If you don't have account, you can create it</p>
+            <p class = "fs-5 text text-center">If you have account, you can sign in</p>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-</body>
+  </body>
 </html>
