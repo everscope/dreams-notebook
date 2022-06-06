@@ -13,7 +13,7 @@ builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<DreamInputModel, DreamInputModel>();
 builder.Services.AddDbContext<DreamsContext>(options =>
-    options.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
 builder.Services.AddTransient<IDatabaseReader, DatabaseReaderSQL>();
@@ -39,7 +39,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 var app = builder.Build();
 
 using (var context = new DreamsContext (new DbContextOptionsBuilder<DreamsContext>()
-    .UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;Integrated Security=True").Options))
+    .UseSqlServer(builder.Configuration.GetConnectionString("Database")).Options))
 {
     context.Database.EnsureCreated();
 }
