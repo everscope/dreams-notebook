@@ -16,7 +16,8 @@ namespace DreamWeb.DAL
 
         public Task<UserAccount> GetUserAccountByUsernameAsync(string username)
         {
-            return _context.UserAccounts.Include(p => p.Dreams).AsNoTracking()
+            return _context.UserAccounts.Include(p => p.Dreams)
+                .AsNoTracking()
                 .FirstAsync(p => p.UserName == username);
         }
 
