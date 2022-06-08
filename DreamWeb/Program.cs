@@ -3,17 +3,33 @@ using DreamWeb.DAL;
 using DreamWeb.DAL.Entities;
 using DreamWeb.DreamPublicationSorting;
 using DreamWeb.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddScoped<DreamInputModel, DreamInputModel>();
-builder.Services.AddDbContext<DreamsContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<DreamsContext>(options =>
+        options.UseMySql(builder.Configuration.GetConnectionString("Database"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("Database"))));
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.KnownProxies.Add(IPAddress.Parse("10.110.0.2"));
+    });
+}
+else
+{
+    builder.Services.AddDbContext<DreamsContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Database")));
+}
+
 builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DreamsContext>();
 builder.Services.AddTransient<IDatabaseReader, DatabaseReaderSQL>();
@@ -38,16 +54,20 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 var app = builder.Build();
 
-using (var context = new DreamsContext (new DbContextOptionsBuilder<DreamsContext>()
-    .UseSqlServer(builder.Configuration.GetConnectionString("Database")).Options))
+using (var scope = app.Services.CreateScope())
 {
-    context.Database.EnsureCreated();
+    var dataContext = scope.ServiceProvider.GetRequiredService<DreamsContext>();
+    dataContext.Database.EnsureCreated();
 }
+
 
 if (!app.Environment.IsDevelopment())
 {
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
     app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
