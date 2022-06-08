@@ -43,7 +43,7 @@ namespace DreamWeb.Areas.Identity.Pages.Account
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null)
                 {
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    return RedirectToPage("./ResetPasswordError");
                 }
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
