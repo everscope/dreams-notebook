@@ -1,9 +1,7 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using DreamWeb.DAL;
+﻿using DreamWeb.DAL;
 using DreamWeb.DAL.Entities;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 using Xunit;
 
 namespace DreamWeb.Tests
