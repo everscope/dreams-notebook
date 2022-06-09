@@ -59,12 +59,4 @@ Also, you can test the application without downloading it, it could be accessed 
 
  - FluentAssertions
 
-  
-
-## Project Architecture:
-
-The solution contains 2 folders, one of them is a web application, other is tests. Tests are written with XUnit and FluentAssertions.
-
-Web application contains 2 controllers, `HomeController.cs` and `UserController.cs.` HomeController is responsible for showing the Index (Main) page and FAQ, UserController is responsible for all actions contained on the user page (sorting, adding/reading/removing notes). Authentification is implemented with Identity and Razor pages.
-
-DAL consists of `DatabaseReaderSQL` (for work with EntityFramework) which implements `IDatabaseReader`, and two entities: `UserAccount` (inherits Identity User) and `DreamPublication`. Using a Database reader as an interface gives the ability to easily move to other Databases or another framework. `DreamPublication` sorting and `IDreamPublication` are used to sort publications by keywords or date and order them by length or date. `DreamContextConverter` is a static class with two methods, which are used to convert an array of strings (received from `DreamsInputModel`) to one string (to store in the database). `EmailService` implements `IEmailService` and provides sanding messages for password recovery.
+ 
